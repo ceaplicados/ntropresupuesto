@@ -1,0 +1,16 @@
+# One year for image files
+<filesMatch ".(jpg|jpeg|png|gif|ico|webp)$">
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+# One month for css and js
+<filesMatch ".(css|js)$">
+Header set Cache-Control "max-age=2628000, public"
+</filesMatch>
+ErrorDocument 404 /404.php
+RewriteEngine On 
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^app.nuestropresupuesto.mx$ [NC]
+# RewriteRule ^ https://app.nuestropresupuesto.mx%{REQUEST_URI} [L,NE,R]
+RewriteRule ^\/?$ app.php [QSA,L]
+
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0

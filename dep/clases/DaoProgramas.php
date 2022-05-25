@@ -1,0 +1,174 @@
+<?php
+require_once 'modelos/np_base.php';
+require_once 'modelos/Programas.php';
+
+class DaoProgramas extends np_base{
+
+  public function add(Programas $Programas){
+    $sql="INSERT INTO Programas (Clave,Nombre,UnidadResponsable) VALUES (:Clave,:Nombre,:UnidadResponsable);";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable()));
+      $Programas->setId($this->_dbh->lastInsertId());
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    return $Programas;
+  }
+
+  public function update(Programas $Programas){
+    $sql="UPDATE Programas SET Clave=:Clave, Nombre=:Nombre, UnidadResponsable=:UnidadResponsable WHERE  Id=:Id;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':Id' => $Programas->getId(), ':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable()));
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    return $Programas;
+  }
+
+  public function addOrUpdate(Programas $Programas){
+    if($Programas->getId()>0){
+      $Programas=$this->update($Programas);
+    }else{
+      $Programas=$this->add($Programas);
+    }
+    return $Programas;
+  }
+
+  public function delete($Id){
+    $sql="DELETE FROM Programas  WHERE  Id=$Id;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    return true;
+  }
+
+  public function show($Id){
+    $sql="SELECT * FROM Programas WHERE Id=$Id;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $Programas=new Programas();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $Programas=$this->createObject($result[0]);
+    }
+    return $Programas;
+  }
+
+  public function showAll(){
+    $sql="SELECT * FROM Programas";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+
+  public function advancedQuery($sql){
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+
+  public function createObject($row){
+    $Programas=new Programas();
+    $Programas->setId($row['Id']);
+    $Programas->setClave($row['Clave']);
+    $Programas->setNombre($row['Nombre']);
+    if(isset($row['Monto'])){
+      $Programas->setMonto($row['Monto']);
+    }
+    $Programas->setUnidadResponsable($row['UnidadResponsable']);
+    return $Programas;
+  }
+  
+  public function getMontoByURVersion($UR,$Version,$Programa=NULL){
+    $wherePrograma="";
+    if($Programa!==NULL){
+      $wherePrograma=" AND  Programas.Id=$Programa";
+    }
+    $sql="SELECT Programas.*, SUM(Monto) AS Monto FROM Programas JOIN ProgramasMonto ON ProgramasMonto.Programa=Programas.Id WHERE UnidadResponsable=$UR AND ProgramasMonto.Version=$Version $wherePrograma GROUP BY Programas.Id";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
+  public function getMontoByProgramaVersion($Programa,$Version){
+    $sql="SELECT Programas.*, SUM(Monto) AS Monto FROM Programas JOIN ProgramasMonto ON ProgramasMonto.Programa=Programas.Id WHERE ProgramasMonto.Version=$Version  AND  Programas.Id=$Programa GROUP BY Programas.Id";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $Programas=new Programas();
+    $row=$sth->fetchAll();
+    if(count($row)>0){
+      $Programas=$this->createObject($row[0]);
+    }
+    return $Programas;
+  }
+  
+  public function searchByEstado($Estado,$search=NULL,$URs=array()){
+    $having="";
+    if(!is_null($search)){
+      $having=" HAVING Buscar LIKE '%$search%'";
+    }
+    $where="";
+    if(count($URs)>0){
+      $where="AND UnidadResponsable.Id IN (".implode(",", $URs).")";
+    }
+    $sql="SELECT CONCAT(Programas.Clave,Programas.Nombre) AS Buscar, Programas.* FROM Programas JOIN UnidadResponsable ON UnidadResponsable.Id=Programas.UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE Estado=$Estado $where $having";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+
+}
