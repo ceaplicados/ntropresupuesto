@@ -1,7 +1,10 @@
 # ntropresupuesto
-App de #NuestroPresupuesto
+App de #NuestroPresupuesto: <https://app.nuestropresupuesto.mx>
 
-#NuestroPresupeusto es un proyecto del Centro de Estudios Aplicados que busca una deliberación democrática del Presupuesto Público para que obedezca a los intereses y necesidades reales de las ciudadanías.
+`<Twitter>` : <https://twitter.com/NtroPresupuesto>
+
+
+#NuestroPresupuesto es un proyecto del Centro de Estudios Aplicados que busca una deliberación democrática del Presupuesto Público para que obedezca a los intereses y necesidades reales de las ciudadanías.
 
 A través de la App de #NuestroPresupuesto se pretende dar herramientas a organizaciones, activistas, académicas y académicos, periodistas, profesionales de la política y ciudadanía en general para entender cómo se lleva la planeación del gasto del dinero público a nivel estatal y su evolución a través del tiempo.  La información presupuestal se clasifica en cinco dimensiones:
 + Objeto de Gasto: ¿En qué se gasta?
