@@ -12,7 +12,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb darklinks">
-					<li><a href="app">Dashboard</a></li>
+					<li><a href="/">Dashboard</a></li>
 					<li class="active">Gasto Federalizado</li>
 				</ol>
 			</div>

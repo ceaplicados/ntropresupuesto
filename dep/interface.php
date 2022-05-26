@@ -31,7 +31,7 @@ if($Session->getUsuario()>0){
 }
 
 function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
-	global $file_script,$Usuario,$Estado;
+	global $file_script,$Usuario,$DaoEstados,$Estado;
 	if($title!==""){
 		$title=" | ".$title;
 	}
@@ -62,28 +62,23 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/animations.css">
-	<link rel="stylesheet" href="css/fonts.css">
 	<link rel="stylesheet" href="css/main.css" class="color-switcher-link">
 	<link rel="stylesheet" href="css/dashboard.css" class="color-switcher-link">
-	<script src="js/vendor/modernizr-2.6.2.min.js"></script>
 	<?php if(file_exists("css/$file_script.css")){ ?>
 	<link rel="stylesheet" href="css/<?php echo($file_script); ?>.css">
 	<?php } ?>
-
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-		<script src="js/vendor/jquery-1.12.4.min.js"></script>
-	<![endif]-->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109234855-2"></script>
+	
+	<script src="https://kit.fontawesome.com/aa9a577cfb.js" crossorigin="anonymous"></script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z18PG9MX4L"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	
-	  gtag('config', 'UA-109234855-2');
+	  gtag('config', 'G-Z18PG9MX4L');
 	</script>
 </head>
 
@@ -272,20 +267,15 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 									</a>
 
 								</li>
+								<?php foreach($DaoEstados->showConVersiones() as $Estado){ ?>
 								<li>
-									<a href="app-estado?e=9">
+									<a href="app-estado?e=<?php echo($Estado->getId()); ?>">
 										<i class="fa fa-th-large"></i>
-										CDMX
+										<?php echo($Estado->getNombre()); ?>
 									</a>
 								
 								</li>
-								<li>
-									<a href="app-estado?e=14">
-										<i class="fa fa-th-large"></i>
-										Jalisco
-									</a>
-
-								</li>
+								<?php } ?>
 							</ul>
 							
 							<h3 class="dark_bg_color">Participa</h3>
@@ -728,14 +718,14 @@ function footerPageAdmin(){
 
 <!-- dashboard libs -->
 
-<!-- events calendar -->
+<!-- events calendar 
 <script src="js/admin/moment.min.js"></script>
-<script src="js/admin/fullcalendar.min.js"></script>
-<!-- range picker -->
-<script src="js/admin/daterangepicker.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+<!-- range picker 
+<script src="js/admin/daterangepicker.js"></script> -->
 
 <!-- charts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.js" integrity="sha512-zO8oeHCxetPn1Hd9PdDleg5Tw1bAaP0YmNvPY8CwcRyUk7d7/+nyElmFrB6f7vg4f7Fv4sui1mcep8RIEShczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- vector map -->
 <script src="js/admin/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="js/admin/jquery-jvectormap-world-mill.js"></script>
@@ -743,8 +733,6 @@ function footerPageAdmin(){
 <script src="js/admin/jquery.sparkline.min.js"></script>
 
 <!-- dashboard init -->
-<script src="js/admin.js"></script>
-<script src="https://kit.fontawesome.com/b32a539ef8.js"></script>
 <?php if(file_exists("js/$file_script.js")){ ?>
 	<script src="js/<?php echo($file_script); ?>.js"></script>
 <?php } ?>
