@@ -41,7 +41,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 				<div class="with_border with_padding">
 					<h4>Presupuesto federal</h4>
 					<div class="canvas-chart-wrapper">
-						<canvas class="canvas-chart-line-presupuesto-federal"></canvas>
+						<canvas id="canvas-chart-line-presupuesto-federal" class="canvas-chart-line"></canvas>
 					</div>
 				</div>
 			</div>
@@ -52,7 +52,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 				<div class="with_border with_padding">
 					<h4>Gasto federalizado</h4>
 					<div class="canvas-chart-wrapper">
-						<canvas class="canvas-chart-line-gasto-federalizado-historico"></canvas>
+						<canvas id="canvas-chart-line-gasto-federalizado-historico" class="canvas-chart-line"></canvas>
 					</div>
 				</div>
 			</div>
@@ -62,7 +62,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 					<div class="with_border with_padding">
 						<h4>Gasto federalizado 2022</h4>
 						<div class="canvas-chart-wrapper">
-							<canvas class="canvas-chart-donut-gasto-federalizado-composicion"></canvas>
+							<canvas id="canvas-chart-donut-gasto-federalizado-composicion" class="canvas-chart-donut"></canvas>
 						</div>
 					</div>
 				</div>
