@@ -1,0 +1,294 @@
+.modal-header button.btn-close {
+	background: unset;
+	color: #333;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	width: auto;
+	height: auto;
+	padding: 0px;
+}
+p.error {
+	color: red;
+	font-size: .9em;
+	display: none;
+}
+
+.error p.error {
+	display: block;
+}
+
+.error input.form-control {border-bottom-color: red;}
+
+th{
+	text-align: center;
+}
+input[type=checkbox], input[type=radio] {
+	display: none;
+}
+ul.participantes {
+	list-style: inline-block;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	text-align: right;
+}
+
+ul.participantes li {
+	display: inline-block;
+	width: 3em;
+	border-radius: 3em;
+	height: 3em;
+	overflow: hidden;
+	transition: .3s ease-in;
+	margin-right: -1.5em;
+}
+
+ul.participantes li img {
+	max-width: 100%;
+}
+
+ul.participantes:hover li {
+	margin-right: 0px;
+}
+
+ul.participantes li:last-child {
+	margin-right: 0em;
+}
+ul.participantes li.edit {
+	background: #ef004f;
+	line-height: 3em;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+
+ul.participantes li.edit i {
+	font-size: 1.5em;
+}
+
+h3.dashboard-page-title i {
+	margin-left: .2em;
+	color: #ef004f;
+}
+
+#modalCompartirCuaderno td .image {
+	width: 4em;
+	height: 4em;
+	overflow: hidden;
+	border-radius: 3em;
+	position: absolute;
+	left: 0em;
+	top: .5em;
+}
+
+#modalCompartirCuaderno td {
+	position: relative;
+	padding-left: 5em;
+	line-height: 3em;
+}
+
+#modalCompartirCuaderno td span.propietario {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	font-size: .9em;
+	color: #999;
+	font-style: italic;
+}
+
+#modalCompartirCuaderno td p {
+	margin: 0px;
+}
+#modalCompartirCuaderno button.button.button-on-input {
+	padding: 15px;
+	margin: 0px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	vertical-align: bottom;
+}
+
+input#buscarEmail {
+	width: calc(100% - 1em - 32px);
+	display: inline-block;
+}
+#modalCompartirCuaderno td i.fa.fa-trash {
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+	color: red;
+	cursor: pointer;
+}
+#modalCompartirCuaderno .sharer {
+	width: 50%;
+	position: relative;
+}
+
+input#urlToCopy {
+	padding-left: .4em;
+	font-size: .7em;
+	padding-right: .4em;
+}
+
+#modalCompartirCuaderno .sharer i.fa.fa-clipboard {
+	position: absolute;
+	top: .76em;
+	right: -1.4em;
+	color: #ef004f;
+	cursor: pointer;
+}
+.canvas-chart-wrapper {
+	position: relative;
+}
+
+p.sinDatos {
+	position: absolute;
+	top: calc(50% - 1em);
+	text-align: center;
+	width: 100%;
+}
+#showModalAddYear{
+	color: #ef004f;
+	cursor: pointer;
+	margin-left: 1em;
+}
+#tablaDatos th i.fa.fa-minus-circle {
+	cursor: pointer;
+	margin-left: .5em;
+	color: #ef004f;
+}
+
+#modalRenglon .form-check.form-check-inline {
+	display: inline-block;
+	margin-right: 2em;
+}
+input#buscarOG_PP {
+	width: 100%;
+}
+#modalRenglon .estado, #modalRenglon  .buscarOG_PP, #modalRenglon  .filtroOG{
+	display: none;
+}
+#modalRenglon[data-tipodato='Total'] .estado, #modalRenglon[data-tipodato='CapituloGasto'] .estado, #modalRenglon[data-tipodato='ConceptoGeneral'] .estado, #modalRenglon[data-tipodato='PartidaGenerica'] .estado, #modalRenglon[data-tipodato='ObjetoGasto'] .estado, #modalRenglon[data-tipodato='ProgramaPresupuestal'] .estado{
+	display: block;
+}
+#modalRenglon[data-tipodato='CapituloGasto'] .buscarOG_PP, #modalRenglon[data-tipodato='ConceptoGeneral'] .buscarOG_PP, #modalRenglon[data-tipodato='PartidaGenerica'] .buscarOG_PP, #modalRenglon[data-tipodato='ObjetoGasto'] .buscarOG_PP, #modalRenglon[data-tipodato='ProgramaPresupuestal'] .buscarOG_PP{
+	display: block;
+}
+#modalRenglon[data-tipodato='Total'] .filtroOG, #modalRenglon[data-tipodato='CapituloGasto'] .filtroOG, #modalRenglon[data-tipodato='ConceptoGeneral'] .filtroOG, #modalRenglon[data-tipodato='PartidaGenerica'] .filtroOG, #modalRenglon[data-tipodato='ObjetoGasto'] .filtroOG{
+	display: block;
+	position: relative;
+}
+#modalRenglon[data-tipodato='Total'] .mostrarComo, #modalRenglon[data-tipodato='CapituloGasto'] .mostrarComo, #modalRenglon[data-tipodato='ConceptoGeneral'] .mostrarComo, #modalRenglon[data-tipodato='PartidaGenerica'] .mostrarComo, #modalRenglon[data-tipodato='ObjetoGasto'] .mostrarComo, #modalRenglon[data-tipodato='ProgramaPresupuestal'] .mostrarComo{
+	display: block;
+}
+ul.resultadosModalRenglon {
+	position: absolute;
+	background: rgba(255,255,255,.8);
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	z-index: 10;
+	border: solid 1px #DDD;
+	box-shadow: 2px 2px 2px rgba(100,100,100,.2);
+}
+
+ul.resultadosModalRenglon li {
+	cursor: pointer;
+	padding: 1em;
+	border-bottom: 1px solid #DDD;
+}
+
+ul.resultadosModalRenglon li:last-child {
+	border-bottom: none;
+}
+
+ul.resultadosModalRenglon li:hover {color: #ef004f;}
+ul.resultadosModalRenglon li.noResult{
+	cursor: unset;
+}
+ul.resultadosModalRenglon li.noResult:hover{
+	color: #303030;
+}
+ul.resultadosModalRenglon li span.clave {
+	font-weight: bold;
+	margin-right: 1em;
+}
+
+ul.resultadosModalRenglon li span.Referencia {
+	display: block;
+	font-size: .8em;
+	text-align: right;
+	font-style: italic;
+}
+input#valorFiltroOG {
+	width: 100%;
+}
+table#tablaDatos tr .clave {
+	font-weight: bold;
+	margin-right: .5em;
+}
+
+table#tablaDatos td {
+	position: relative;
+}
+table#tablaDatos td.graph{
+	text-align: center;
+}
+table#tablaDatos td.valor{
+	text-align: right;
+}
+table#tablaDatos td.valor .nota {
+	font-size: .8em;
+}
+table#tablaDatos td.valor .notaMonto {
+	display: block;
+	font-size: .6em;
+	margin-top: .3em;
+}
+table#tablaDatos td .estado {
+	font-size: .8em;
+	position: absolute;
+	top: .3em;
+	right: .3em;
+	padding: .5em;
+	background: #818181;
+	color: white;
+	padding-top: .1em;
+	padding-bottom: .1em;
+}
+#tablaDatos td span.Referencia {
+	display: block;
+	font-size: .8em;
+}
+table#tablaDatos tr .nombre a {
+	margin-left: .5em;
+}
+#tablaDatos td span.nombre i.fa.fa-pencil-square-o {
+	cursor: pointer;
+	margin-left: 0.5em;
+	display: inline-block;
+	color: #ef004f;
+	display: none;
+}
+#tablaDatos td.graph i {
+	cursor: pointer;
+}
+#tablaDatos td.graph.active i {
+	color: #ef004f;
+}
+#tablaDatos tr:hover td span.nombre i.fa.fa-pencil-square-o {
+	display: inline-block;
+}
+table#tablaDatos td .mostrar {
+	font-size: .8em;
+	font-style: italic;
+	position: absolute;
+	bottom: .5em;
+	right: .5em;
+}
+button#delRenglon {
+	border: #ef004f 1px solid;
+	float: left;
+	background: none;
+	color: #ef004f;
+}

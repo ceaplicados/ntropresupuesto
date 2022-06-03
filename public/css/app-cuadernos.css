@@ -1,0 +1,106 @@
+.modal-header button.btn-close {
+	background: unset;
+	color: #333;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	width: auto;
+	height: auto;
+	padding: 0px;
+}
+p.error {
+	color: red;
+	font-size: .9em;
+	display: none;
+}
+
+.error p.error {
+	display: block;
+}
+
+.error input.form-control {border-bottom-color: red;}
+.row.listCuadernos {
+	line-height: 31em;
+}
+
+.cuaderno {
+	line-height: 1.3em;
+	vertical-align: top;
+	display: inline-block;
+	height: 23em;
+	color: #333;
+}
+.cuaderno .with_border.with_padding {
+	position: relative;
+}
+.cuaderno .descripcion {
+	max-height: 10em;
+	overflow: auto;
+}
+.cuaderno ul.participantes {
+	list-style: none;
+	display: block;
+	padding: 0px;
+	margin: 0px;
+	text-align: right;
+}
+
+.cuaderno ul.participantes li {
+	display: inline-block;
+	width: 3em;
+	border-radius: 3em;
+	height: 3em;
+	overflow: hidden;
+	transition: .3s ease-in;
+	margin-right: -1.5em;
+}
+
+.cuaderno ul.participantes li img {
+	max-width: 100%;
+}
+
+.cuaderno ul.participantes:hover li {
+	margin-right: 0px;
+}
+
+.cuaderno ul.participantes li:last-child {
+	margin-right: 0em;
+}
+.cuaderno a.ligaCuaderno {
+	position: absolute;
+	right: 0.4em;
+	top: .4em;
+	font-size: 3em;
+}
+
+.cuaderno h5 {
+	padding-right: 2em;
+}
+
+.cuaderno span.publico {
+	color: #ef004f;
+	font-size: 1.5em;
+	position: absolute;
+	bottom: 3em;
+	left: 1.5em;
+}
+.cuaderno ul.ODSs {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-align: right;
+	position: absolute;
+	left: 2em;
+	bottom: 1.5em;
+}
+
+.cuaderno ul.ODSs li {
+	display: inline-block;
+	width: 3em;
+	height: 2em;
+	margin-right: 0.1em;
+}
+
+.cuaderno ul.ODSs li img {
+	max-width: 100%;
+}

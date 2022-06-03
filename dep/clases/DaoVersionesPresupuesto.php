@@ -100,15 +100,21 @@ class DaoVersionesPresupuesto extends np_base{
 
   public function createObject($row){
     $VersionesPresupuesto=new VersionesPresupuesto();
-    $VersionesPresupuesto->setId($row['Id']);
-    $VersionesPresupuesto->setEstado($row['Estado']);
-    $VersionesPresupuesto->setAnio($row['Anio']);
-    $VersionesPresupuesto->setNombre($row['Nombre']);
-    $VersionesPresupuesto->setDescripcion($row['Descripcion']);
-    $VersionesPresupuesto->setFecha($row['Fecha']);
-    $VersionesPresupuesto->setActual($row['Actual']);
-    $VersionesPresupuesto->setObjetoGasto($row['ObjetoGasto']);
-    $VersionesPresupuesto->setProgramaPresupuestal($row['ProgramaPresupuestal']);
+    if(isset($row['Id'])){
+      $VersionesPresupuesto->setId($row['Id']);
+    }
+    if(isset($row['Estado'])){
+      $VersionesPresupuesto->setEstado($row['Estado']);
+      $VersionesPresupuesto->setNombre($row['Nombre']);
+      $VersionesPresupuesto->setDescripcion($row['Descripcion']);
+      $VersionesPresupuesto->setFecha($row['Fecha']);
+      $VersionesPresupuesto->setActual($row['Actual']);
+      $VersionesPresupuesto->setObjetoGasto($row['ObjetoGasto']);
+      $VersionesPresupuesto->setProgramaPresupuestal($row['ProgramaPresupuestal']);
+    }
+    if(isset($row['Anio'])){
+      $VersionesPresupuesto->setAnio($row['Anio']);
+    }
     if(isset($row['Monto'])){
       $VersionesPresupuesto->setMonto($row['Monto']);
     }

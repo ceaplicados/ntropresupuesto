@@ -63,11 +63,11 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/animations.css">
-	<link rel="stylesheet" href="css/main.css" class="color-switcher-link">
-	<link rel="stylesheet" href="css/dashboard.css" class="color-switcher-link">
+	<link rel="stylesheet" href="/css/animations.css">
+	<link rel="stylesheet" href="/css/main.css" class="color-switcher-link">
+	<link rel="stylesheet" href="/css/dashboard.css" class="color-switcher-link">
 	<?php if(file_exists("css/$file_script.css")){ ?>
-	<link rel="stylesheet" href="css/<?php echo($file_script); ?>.css">
+	<link rel="stylesheet" href="/css/<?php echo($file_script); ?>.css">
 	<?php } ?>
 	
 	<script src="https://kit.fontawesome.com/aa9a577cfb.js" crossorigin="anonymous"></script>
@@ -180,7 +180,7 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 				<div class="side_header_logo ds ms">
 					<a href="app">
 						<span class="logo margin_0">
-							<img src="imgs/logo_blanco.svg" alt="#NuestroPresupuesto">
+							<img src="/imgs/logo_blanco.svg" alt="#NuestroPresupuesto">
 						</span>
 					</a>
 				</div>
@@ -713,8 +713,8 @@ function footerPageAdmin(){
 <div id="toast"></div>
 
 <!-- template init -->
-<script src="js/compressed.js"></script>
-<script src="js/main.js"></script>
+<script src="/js/compressed.js"></script>
+<script src="/js/main.js"></script>
 
 <!-- dashboard libs -->
 
@@ -727,14 +727,14 @@ function footerPageAdmin(){
 <!-- charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- vector map -->
-<script src="js/admin/jquery-jvectormap-2.0.3.min.js"></script>
-<script src="js/admin/jquery-jvectormap-world-mill.js"></script>
+<script src="/js/admin/jquery-jvectormap-2.0.3.min.js"></script>
+<script src="/js/admin/jquery-jvectormap-world-mill.js"></script>
 <!-- small charts -->
-<script src="js/admin/jquery.sparkline.min.js"></script>
+<script src="/js/admin/jquery.sparkline.min.js"></script>
 
 <!-- dashboard init -->
 <?php if(file_exists("js/$file_script.js")){ ?>
-	<script src="js/<?php echo($file_script); ?>.js"></script>
+	<script src="/js/<?php echo($file_script); ?>.js"></script>
 <?php } ?>
 </body>
 

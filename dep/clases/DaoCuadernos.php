@@ -123,6 +123,22 @@ class DaoCuadernos extends np_base{
     return $Cuadernos;
   }
   
+  public function getPublicos(){
+    $sql="SELECT * FROM Cuadernos WHERE Publico=1";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
   public function getByUsuario($Usuario){
 	  $sql="SELECT Cuadernos.* FROM Cuadernos WHERE Owner=$Usuario UNION SELECT Cuadernos.* FROM Cuadernos JOIN UsuariosCuaderno ON UsuariosCuaderno.Cuaderno=Cuadernos.Id WHERE Usuario=$Usuario";
 	  try {
