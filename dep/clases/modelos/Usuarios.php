@@ -14,6 +14,7 @@ class Usuarios {
   public $ResetKey;
   public $Image;
   public $UUID;
+  public $Admin;
 
   function __construct() {
     $this->Id = NULL;
@@ -29,6 +30,7 @@ class Usuarios {
     $this->ResetKey = NULL;
     $this->Image = NULL;
     $this->UUID = NULL;
+    $this->Admin = 0;
   }
 
   public function getId(){
@@ -70,6 +72,9 @@ class Usuarios {
   public function getUUID(){
     return $this->UUID;
   }
+  public function getAdmin(){
+    return $this->Admin;
+  }
 
   public function setId($Id){
     return $this->Id=$Id;
@@ -109,6 +114,9 @@ class Usuarios {
   }
   public function setUUID($UUID){
     return $this->UUID=$UUID;
+  }
+  public function setAdmin($Admin){
+    return $this->Admin=$Admin;
   }
 
 }

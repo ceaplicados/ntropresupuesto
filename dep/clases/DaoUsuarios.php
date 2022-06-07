@@ -5,11 +5,15 @@ require_once 'modelos/Usuarios.php';
 class DaoUsuarios extends np_base{
 
   public function add(Usuarios $Usuarios){
-    $sql="INSERT INTO Usuarios (Sobrenombre,Nombre,Telefono,Celular,Email,Estado,Password,DateBorn,Activo,ResetKey,Image,UUID) VALUES (:Sobrenombre,:Nombre,:Telefono,:Celular,:Email,:Estado,:Password,:DateBorn,:Activo,:ResetKey,:Image,:UUID);";
+    $sql="INSERT INTO Usuarios (Sobrenombre,Nombre,Telefono,Celular,Email,Estado,Password,DateBorn,Activo,ResetKey,Image,UUID,Admin) VALUES (:Sobrenombre,:Nombre,:Telefono,:Celular,:Email,:Estado,:Password,:DateBorn,:Activo,:ResetKey,:Image,:UUID,:Admin);";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Sobrenombre' => $Usuarios->getSobrenombre(), ':Nombre' => $Usuarios->getNombre(), ':Telefono' => $Usuarios->getTelefono(), ':Celular' => $Usuarios->getCelular(), ':Email' => $Usuarios->getEmail(), ':Estado' => $Usuarios->getEstado(), ':Password' => $Usuarios->getPassword(), ':DateBorn' => $Usuarios->getDateBorn(), ':Activo' => $Usuarios->getActivo(), ':ResetKey' => $Usuarios->getResetKey(), ':Image' => $Usuarios->getImage(), ':UUID' => $Usuarios->getUUID()));
+      $sth->execute(array(':Sobrenombre' => $Usuarios->getSobrenombre(), ':Nombre' => $Usuarios->getNombre(), ':Telefono' => $Usuarios->getTelefono(), ':Celular' => $Usuarios->getCelular(), ':Email' => $Usuarios->getEmail(), ':Estado' => $Usuarios->getEstado(), ':Password' => $Usuarios->getPassword(), ':DateBorn' => $Usuarios->getDateBorn(), ':Activo' => $Usuarios->getActivo(), ':ResetKey' => $Usuarios->getResetKey(), ':Image' => $Usuarios->getImage(), ':UUID' => $Usuarios->getUUID(), ':Admin' => $Usuarios->getAdmin()));
       $Usuarios->setId($this->_dbh->lastInsertId());
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Usuarios): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -18,10 +22,14 @@ class DaoUsuarios extends np_base{
   }
 
   public function update(Usuarios $Usuarios){
-    $sql="UPDATE Usuarios SET Sobrenombre=:Sobrenombre, Nombre=:Nombre, Telefono=:Telefono, Celular=:Celular, Email=:Email, Estado=:Estado, Password=:Password, DateBorn=:DateBorn, Activo=:Activo, ResetKey=:ResetKey, Image=:Image, UUID=:UUID WHERE  Id=:Id;";
+    $sql="UPDATE Usuarios SET Sobrenombre=:Sobrenombre, Nombre=:Nombre, Telefono=:Telefono, Celular=:Celular, Email=:Email, Estado=:Estado, Password=:Password, DateBorn=:DateBorn, Activo=:Activo, ResetKey=:ResetKey, Image=:Image, UUID=:UUID, Admin=:Admin WHERE  Id=:Id;";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Id' => $Usuarios->getId(), ':Sobrenombre' => $Usuarios->getSobrenombre(), ':Nombre' => $Usuarios->getNombre(), ':Telefono' => $Usuarios->getTelefono(), ':Celular' => $Usuarios->getCelular(), ':Email' => $Usuarios->getEmail(), ':Estado' => $Usuarios->getEstado(), ':Password' => $Usuarios->getPassword(), ':DateBorn' => $Usuarios->getDateBorn(), ':Activo' => $Usuarios->getActivo(), ':ResetKey' => $Usuarios->getResetKey(), ':Image' => $Usuarios->getImage(), ':UUID' => $Usuarios->getUUID()));
+      $sth->execute(array(':Id' => $Usuarios->getId(), ':Sobrenombre' => $Usuarios->getSobrenombre(), ':Nombre' => $Usuarios->getNombre(), ':Telefono' => $Usuarios->getTelefono(), ':Celular' => $Usuarios->getCelular(), ':Email' => $Usuarios->getEmail(), ':Estado' => $Usuarios->getEstado(), ':Password' => $Usuarios->getPassword(), ':DateBorn' => $Usuarios->getDateBorn(), ':Activo' => $Usuarios->getActivo(), ':ResetKey' => $Usuarios->getResetKey(), ':Image' => $Usuarios->getImage(), ':UUID' => $Usuarios->getUUID(), ':Admin' => $Usuarios->getAdmin()));
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Usuarios): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -43,6 +51,10 @@ class DaoUsuarios extends np_base{
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Usuarios): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -113,8 +125,10 @@ class DaoUsuarios extends np_base{
     $Usuarios->setResetKey($row['ResetKey']);
     $Usuarios->setImage($row['Image']);
     $Usuarios->setUUID($row['UUID']);
+    $Usuarios->setAdmin($row['Admin']);
     return $Usuarios;
   }
+
   public function getByEmail($Email){
     $sql="SELECT * FROM Usuarios WHERE Email='$Email';";
     try {
