@@ -1,0 +1,111 @@
+.side_header_logo .logo img {
+	  width: 60%;
+	}
+#selectVersion select {
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: 1em;
+	height: auto;
+	font-size: .8em;
+}
+#selectVersion button.theme_button {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	line-height: 2em;
+	margin-left: .7em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#chart{
+	height: calc(100vh - 4em);
+}
+.canvas-chart-donut-capitulos-gasto{
+	height: calc(100vh - 15em);
+}
+#tablaMontos{
+	margin-top: 1em;
+}
+#tablaMontos tr.hide {
+	display: none;
+}
+#tablaMontos .hidden{
+	display: none;
+}
+#tablaMontos .monto{
+	text-align: right;
+}
+#tablaMontos tbody tr:hover{
+	cursor: pointer;
+	color: black;
+	background: #DDDDDD;
+}
+#tablaMontos tbody tr i.fa-chevron-circle-right{
+	color: teal;
+	margin-left: .5em;
+}
+#tablaMontos tfoot {
+	font-weight: bold;
+	border-top: black 2px solid;
+}
+
+
+#chart {
+	  background: #fff;
+	  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	
+	.title {
+		font-weight: bold;
+		font-size: 24px;
+		text-align: center;
+		margin-top: 6px;
+		margin-bottom: 6px;
+	}
+	text {
+	  pointer-events: none;
+	}
+	
+	.grandparent text {
+	  font-weight: bold;
+	}
+	
+	rect {
+	  fill: none;
+	  stroke: #fff;
+	}
+	
+	rect.parent,
+	.grandparent rect {
+	  stroke-width: 2px;
+	}
+	
+	rect.parent {
+		pointer-events: none;
+	}
+	
+	.grandparent rect {
+	  fill: orange;
+	}
+	
+	.grandparent:hover rect {
+	  fill: #ee9700;
+	}
+	
+	.children rect.parent,
+	.grandparent rect {
+	  cursor: pointer;
+	}
+	
+	.children rect.parent {
+	  fill: #bbb;
+	  fill-opacity: .5;
+	}
+	
+	.children:hover rect.child {
+	  fill: #bbb;
+	}
+	
+#tablaProgramas .unidadResponsable{
+	font-size: .8em;
+}

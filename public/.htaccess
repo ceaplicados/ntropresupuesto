@@ -18,6 +18,6 @@ RewriteRule ^backend\/?$ background.php [QSA,L]
 RewriteRule ^login\/?$ login.php [QSA,L]
 RewriteRule ^logout\/?$ logout.php [QSA,L]
 RewriteRule ^oauth_Google\/?$ oauth_Google.php [QSA,L]
-
+RewriteRule ^([A-Z]+)\/?$ app-estado.php [QSA,L]
 
 SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0

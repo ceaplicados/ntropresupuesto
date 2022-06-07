@@ -20,18 +20,18 @@ if(isset($_COOKIE["SessionUID"])){
 	}
 }
 
-$Estado=new Estados();
+$EstadoUsuario=new Estados();
 if($Session->getUsuario()>0){
 	$Usuario=$DaoUsuarios->show($Session->getUsuario());
 	if($Usuario->getEstado()!==NULL){
-		$Estado=$DaoEstados->show($Usuario->getEstado());
+		$EstadoUsuario=$DaoEstados->show($Usuario->getEstado());
 	}
 }else{
 	$Usuario=new Usuarios();
 }
 
 function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
-	global $file_script,$Usuario,$DaoEstados,$Estado;
+	global $file_script,$Usuario,$DaoEstados,$EstadoUsuario;
 	if($title!==""){
 		$title=" | ".$title;
 	}
@@ -203,8 +203,8 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 											<div class="media-body media-middle">
 												<h4><?php echo($Usuario->getNombre()); ?></h4>
 												<?php 
-												if($Estado->getId()>0){
-													echo($Estado->getNombre());
+												if($EstadoUsuario->getId()>0){
+													echo($EstadoUsuario->getNombre());
 												} ?>
 
 											</div>

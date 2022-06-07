@@ -117,7 +117,24 @@ class DaoEstados extends np_base{
     $Estados->setCodigo($row['Codigo']);
     return $Estados;
   }
-
+  
+  public function getByCodigo($Codigo){
+    $sql="SELECT * FROM Estados WHERE Codigo='$Codigo';";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $Estados=new Estados();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $Estados=$this->createObject($result[0]);
+    }
+    return $Estados;
+  }
+  
   public function showConVersiones(){
     $sql="SELECT DISTINCT Estados.* FROM Estados JOIN VersionesPresupuesto ON VersionesPresupuesto.Estado=Estados.Id";
     try {

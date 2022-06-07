@@ -147,7 +147,7 @@ class DaoUnidadPresupuestal extends np_base{
     if($UP!==NULL){
       $whereUP=" AND UnidadResponsable.UnidadPresupuestal=$UP";
     }
-    $sql="SELECT UnidadPresupuestal.*, SUM(Monto) AS Monto  FROM objetodegasto JOIN unidadresponsable ON unidadresponsable.Id=objetodegasto.UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=unidadresponsable.UnidadPresupuestal WHERE VersionPresupuesto=$Version $whereUP GROUP BY UnidadResponsable.UnidadPresupuestal ORDER BY UnidadPresupuestal.Clave";
+    $sql="SELECT UnidadPresupuestal.*, SUM(Monto) AS Monto  FROM ObjetoDeGasto JOIN UnidadResponsable ON UnidadResponsable.Id=ObjetoDeGasto.UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE VersionPresupuesto=$Version $whereUP GROUP BY UnidadResponsable.UnidadPresupuestal ORDER BY UnidadPresupuestal.Clave";
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();
