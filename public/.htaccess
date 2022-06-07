@@ -15,6 +15,9 @@ RewriteRule ^\/?$ app.php [QSA,L]
 RewriteRule ^cuadernos\/?$ app-cuadernos.php [QSA,L]
 RewriteRule ^cuaderno/?([a-z_0-9]+)\/?$ app-cuaderno.php [QSA,L]
 RewriteRule ^backend\/?$ background.php [QSA,L]
+RewriteRule ^login\/?$ login.php [QSA,L]
+RewriteRule ^logout\/?$ logout.php [QSA,L]
+RewriteRule ^oauth_Google\/?$ oauth_Google.php [QSA,L]
 
 
 SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0

@@ -1,0 +1,19 @@
+#loginArea{
+	margin-top: 3em;
+	padding: 1em;
+	background: white;
+}
+#loginArea a.btn {
+	padding: 0px;
+}
+a#loginWithGoogle, a#loginWithMS {
+	box-shadow: 2px 2px 4px gray;
+	transition: .2s ease-in-out;
+	border-radius: 3px;
+}
+a#loginWithGoogle:hover, a#loginWithMS:hover {
+	box-shadow: 3px 4px 6px gray;
+}
+a#loginWithGoogle:focus, a#loginWithMS:focus {
+	box-shadow: -2px -2px 4px gray;
+}

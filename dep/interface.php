@@ -254,14 +254,14 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 						<nav class="mainmenu_side_wrapper">
 							<h3 class="dark_bg_color">Dashboard</h3>
 							<ul class="menu-click">
-								<?php if($Usuario->getId()>0){ ?>
-								<li><a href="app-cuadernos">
-									<i class="fa fa-book" aria-hidden="true"></i>
-									Mis cuadernos
-								</a></li>
-								<?php } ?>
 								<li>
-									<a href="app">
+									<a href="/cuadernos">
+										<i class="fa fa-book" aria-hidden="true"></i>
+									Cuadernos
+									</a>
+								</li>
+								<li>
+									<a href="/">
 										<i class="fa fa-th-large"></i>
 										Gasto federalizado
 									</a>
@@ -628,17 +628,17 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 									</a>
 								</li>-->
 								<li>
-									<a href="app-profile">
+									<a href="/profile">
 										<i class="fa fa-user" aria-hidden="true"></i>
 										Mi información
 									</a>
 								</li>
-								<li><a href="app-cuadernos">
+								<li><a href="/cuadernos">
 									<i class="fa fa-book" aria-hidden="true"></i>
 									Mis cuadernos
 								</a></li>
 								<li>
-									<a href="logout">
+									<a href="/logout">
 										<i class="fa fa-sign-out"></i>
 										Cerrar sesión
 									</a>
@@ -649,7 +649,7 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 
 					</li>
 					<?php }else{ ?>
-					<li class=""><a class="btn-small header-button" href="login">Iniciar sesión</a></li>
+					<li class=""><a class="btn-small header-button" href="/login">Iniciar sesión</a></li>
 					<?php } ?>
 						<li class="dropdown visible-xs-inline-block">
 							<a href="#" class="search_modal_button header-button">

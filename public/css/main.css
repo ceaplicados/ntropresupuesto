@@ -13069,6 +13069,41 @@ img#logoFooter {
 footer a.social-icon {
     font-size: 1em;
 }
+
+.btn {
+  display: inline-block;
+  line-height: 2em;
+  color: #333333;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: .15s ease-in-out;
+  box-shadow: 2px 2px 4px rgba(100,100,100,.5);
+
+  &:hover {
+	color: black;
+  }
+
+  .btn-check:focus + &,
+  &:focus {
+	outline: 0;
+	box-shadow: box-shadow: 2px 4px 6px rgba(100,100,100,.7);
+  }
+
+  &:disabled,
+  &.disabled,
+  fieldset:disabled & {
+	pointer-events: none;
+	opacity: .8;
+	box-shadow: none;
+  }
+}
+
+
 div#toast {
 	position: fixed;
 	top: 5em;

@@ -432,5 +432,22 @@ class np_base extends np_bdd{
     }
     return $valor;
   }
+  
+  public function getParam($param){
+    $sql="SELECT * FROM Parametros WHERE Nombre='$param';";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $valor=false;
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $valor=$result[0]["Valor"];
+    }
+    return $valor;
+  }
 
 }
