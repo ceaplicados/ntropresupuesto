@@ -5,11 +5,15 @@ require_once 'modelos/Programas.php';
 class DaoProgramas extends np_base{
 
   public function add(Programas $Programas){
-    $sql="INSERT INTO Programas (Clave,Nombre,UnidadResponsable) VALUES (:Clave,:Nombre,:UnidadResponsable);";
+    $sql="INSERT INTO Programas (Clave,Nombre,UnidadResponsable,ODS,MetaODS,Data) VALUES (:Clave,:Nombre,:UnidadResponsable,:ODS,:MetaODS);";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable()));
+      $sth->execute(array(':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable(), ':ODS' => $Programas->getODS(), ':MetaODS' => $Programas->getMetaODS(), ':Data' => $Programas->getData()));
       $Programas->setId($this->_dbh->lastInsertId());
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Programas): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -18,10 +22,14 @@ class DaoProgramas extends np_base{
   }
 
   public function update(Programas $Programas){
-    $sql="UPDATE Programas SET Clave=:Clave, Nombre=:Nombre, UnidadResponsable=:UnidadResponsable WHERE  Id=:Id;";
+    $sql="UPDATE Programas SET Clave=:Clave, Nombre=:Nombre, UnidadResponsable=:UnidadResponsable, ODS=:ODS, MetaODS=:MetaODS, Data=:Data) WHERE  Id=:Id;";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Id' => $Programas->getId(), ':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable()));
+      $sth->execute(array(':Id' => $Programas->getId(), ':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable(), ':ODS' => $Programas->getODS(), ':MetaODS' => $Programas->getMetaODS(), ':Data' => $Programas->getData()));
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Programas): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -43,6 +51,10 @@ class DaoProgramas extends np_base{
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Programas): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -103,13 +115,16 @@ class DaoProgramas extends np_base{
     $Programas->setId($row['Id']);
     $Programas->setClave($row['Clave']);
     $Programas->setNombre($row['Nombre']);
+    $Programas->setUnidadResponsable($row['UnidadResponsable']);
+    $Programas->setODS($row['ODS']);
+    $Programas->setMetaODS($row['MetaODS']);
+    $Programas->setData($row['Data']);
     if(isset($row['Monto'])){
       $Programas->setMonto($row['Monto']);
     }
-    $Programas->setUnidadResponsable($row['UnidadResponsable']);
     return $Programas;
   }
-  
+
   public function getMontoByURVersion($UR,$Version,$Programa=NULL){
     $wherePrograma="";
     if($Programa!==NULL){

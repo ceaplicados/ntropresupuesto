@@ -13102,7 +13102,9 @@ footer a.social-icon {
 	box-shadow: none;
   }
 }
-
+.side_header_logo .logo img {
+  width: 60%;
+}
 
 div#toast {
 	position: fixed;

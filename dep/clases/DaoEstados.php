@@ -5,11 +5,15 @@ require_once 'modelos/Estados.php';
 class DaoEstados extends np_base{
 
   public function add(Estados $Estados){
-    $sql="INSERT INTO Estados (Nombre) VALUES (:Nombre);";
+    $sql="INSERT INTO Estados (Nombre,Codigo) VALUES (:Nombre,:Codigo);";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Nombre' => $Estados->getNombre()));
+      $sth->execute(array(':Nombre' => $Estados->getNombre(), ':Codigo' => $Estados->getCodigo()));
       $Estados->setId($this->_dbh->lastInsertId());
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Estados): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -18,10 +22,14 @@ class DaoEstados extends np_base{
   }
 
   public function update(Estados $Estados){
-    $sql="UPDATE Estados SET Nombre=:Nombre WHERE  Id=:Id;";
+    $sql="UPDATE Estados SET Nombre=:Nombre, Codigo=:Codigo WHERE  Id=:Id;";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Id' => $Estados->getId(), ':Nombre' => $Estados->getNombre()));
+      $sth->execute(array(':Id' => $Estados->getId(), ':Nombre' => $Estados->getNombre(), ':Codigo' => $Estados->getCodigo()));
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Estados): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -43,6 +51,10 @@ class DaoEstados extends np_base{
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();
+      $error=$sth->errorInfo();
+      if($error[0]>0){
+            error_log('PDO Error (Estados): '.json_encode($error));
+      }
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -102,6 +114,7 @@ class DaoEstados extends np_base{
     $Estados=new Estados();
     $Estados->setId($row['Id']);
     $Estados->setNombre($row['Nombre']);
+    $Estados->setCodigo($row['Codigo']);
     return $Estados;
   }
 

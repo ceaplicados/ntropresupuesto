@@ -5,6 +5,9 @@ class Programas {
   public $Clave;
   public $Nombre;
   public $UnidadResponsable;
+  public $ODS;
+  public $MetaODS;
+  public $Data;
   public $Monto;
 
   function __construct() {
@@ -12,6 +15,9 @@ class Programas {
     $this->Clave = NULL;
     $this->Nombre = NULL;
     $this->UnidadResponsable = NULL;
+    $this->ODS = NULL;
+    $this->MetaODS = NULL;
+    $this->Data = NULL;
     $this->Monto = 0;
   }
 
@@ -26,6 +32,15 @@ class Programas {
   }
   public function getUnidadResponsable(){
     return $this->UnidadResponsable;
+  }
+  public function getODS(){
+    return $this->ODS;
+  }
+  public function getMetaODS(){
+    return $this->MetaODS;
+  }
+  public function getData(){
+    return $this->Data;
   }
   public function getMonto(){
     return $this->Monto;
@@ -42,6 +57,15 @@ class Programas {
   }
   public function setUnidadResponsable($UnidadResponsable){
     return $this->UnidadResponsable=$UnidadResponsable;
+  }
+  public function setODS($ODS){
+    return $this->ODS=$ODS;
+  }
+  public function setMetaODS($MetaODS){
+    return $this->MetaODS=$MetaODS;
+  }
+  public function setData($Data){
+    return $this->Data=$Data;
   }
   public function setMonto($Monto){
     return $this->Monto=$Monto;

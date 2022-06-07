@@ -269,7 +269,7 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 								</li>
 								<?php foreach($DaoEstados->showConVersiones() as $Estado){ ?>
 								<li>
-									<a href="app-estado?e=<?php echo($Estado->getId()); ?>">
+									<a href="/<?php echo($Estado->getCodigo()); ?>">
 										<i class="fa fa-th-large"></i>
 										<?php echo($Estado->getNombre()); ?>
 									</a>
