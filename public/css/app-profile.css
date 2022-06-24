@@ -1,0 +1,11 @@
+p.error {
+	color: red;
+	font-size: .9em;
+	display: none;
+}
+
+.error p.error {
+	display: block;
+}
+
+.error input.form-control {border-bottom-color: red;}

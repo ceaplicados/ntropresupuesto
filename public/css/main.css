@@ -13102,8 +13102,23 @@ footer a.social-icon {
 	box-shadow: none;
   }
 }
+#user-dropdown-menu img.userImage {
+	border-radius: 3em;
+	width: 3em;
+}
 .side_header_logo .logo img {
   width: 60%;
+}
+.side_header_inner {
+	padding-top: 1px;
+}
+
+.menu-click img.ODS_wheel {
+	max-width: 2em;
+	margin-left: -.7em;
+	margin-right: .2em;
+	vertical-align: bottom;
+	transform: translateY(0.2em);
 }
 
 div#toast {

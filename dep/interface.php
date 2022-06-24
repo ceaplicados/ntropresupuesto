@@ -189,83 +189,16 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 				</span>
 				<div class="scrollbar-macosx">
 					<div class="side_header_inner">
-
-						<!-- user -->
-						<?php if($Usuario->getId()>0){ ?>
-						<div class="user-menu">
-							<ul class="menu-click">
-								<li>
-									<a href="#">
-										<div class="media">
-											<div class="media-left media-middle">
-												<img src="<?php echo($Usuario->getImage()); ?>" alt="">
-											</div>
-											<div class="media-body media-middle">
-												<h4><?php echo($Usuario->getNombre()); ?></h4>
-												<?php 
-												if($EstadoUsuario->getId()>0){
-													echo($EstadoUsuario->getNombre());
-												} ?>
-
-											</div>
-
-										</div>
-									</a>
-									<ul>
-										<?php /* ?>
-										<li>
-											<a href="admin_profile.html">
-												<i class="fa fa-user"></i>
-												Profile
-											</a>
-										</li>
-										<li>
-											<a href="admin_profile_edit.html">
-												<i class="fa fa-edit"></i>
-												Edit Profile
-											</a>
-										</li>
-										<li>
-											<a href="admin_inbox.html">
-												<i class="fa fa-envelope-o"></i>
-												Inbox
-											</a>
-										</li>
-										*/ ?>
-										<li>
-											<a href="app-profile">
-												<i class="fa fa-user" aria-hidden="true"></i>
-												Mi información
-											</a>
-										</li>
-										<li>
-											<a href="logout">
-												<i class="fa fa-sign-out"></i>
-												Cerrar sesión
-											</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-
-						</div>
-						<?php } ?>
 						<!-- main side nav start -->
 						<nav class="mainmenu_side_wrapper">
-							<h3 class="dark_bg_color">Dashboard</h3>
+							<h3 class="dark_bg_color">Presupuestos</h3>
 							<ul class="menu-click">
-								<li>
-									<a href="/cuadernos">
-										<i class="fa fa-book" aria-hidden="true"></i>
-									Cuadernos
-									</a>
-								</li>
 								<li>
 									<a href="/">
 										<i class="fa fa-th-large"></i>
 										Gasto federalizado
 									</a>
-
+							
 								</li>
 								<?php foreach($DaoEstados->showConVersiones() as $Estado){ ?>
 								<li>
@@ -276,6 +209,22 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 								
 								</li>
 								<?php } ?>
+							</ul>
+							<h3 class="dark_bg_color">Comunidad</h3>
+							<ul class="menu-click">
+								<li>
+									<a href="/cuadernos">
+										<i class="fa fa-book" aria-hidden="true"></i>
+										Cuadernos
+									</a>
+								</li>
+								<li>
+									<a href="/ddhh">
+										<img src="/imgs/ODS/SDG_Wheel_Transparent_WEB.png" class="ODS_wheel">
+										Presupuesto con perspectiva de derechos
+									</a>
+
+								</li>
 							</ul>
 							
 							<h3 class="dark_bg_color">Participa</h3>
@@ -611,7 +560,11 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 					<?php if($Usuario->getId()>0){ ?>
 					<li class="dropdown user-dropdown-menu">
 						<a class="header-button" id="user-dropdown-menu" data-target="#" href="./" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+							<?php if(strlen($Usuario->getImage())>0){ ?>
+							<img class="userImage" src="<?php echo($Usuario->getImage()); ?>" alt="">
+							<?php }else{ ?>
 							<i class="fa fa-user grey"></i> <span class="header-button-text">User</span>
+							<?php } ?>
 						</a>
 						<div class="dropdown-menu ls">
 							<ul class="nav darklinks">
