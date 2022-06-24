@@ -5,10 +5,10 @@ require_once 'modelos/UnidadResponsable.php';
 class DaoUnidadResponsable extends np_base{
 
   public function add(UnidadResponsable $UnidadResponsable){
-    $sql="INSERT INTO UnidadResponsable (Clave,Nombre,UnidadPresupuestal) VALUES (:Clave,:Nombre,:UnidadPresupuestal);";
+    $sql="INSERT INTO UnidadResponsable (Clave,Nombre,UnidadPresupuestal,OtrosNombres) VALUES (:Clave,:Nombre,:UnidadPresupuestal,:OtrosNombres);";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Clave' => $UnidadResponsable->getClave(), ':Nombre' => $UnidadResponsable->getNombre(), ':UnidadPresupuestal' => $UnidadResponsable->getUnidadPresupuestal()));
+      $sth->execute(array(':Clave' => $UnidadResponsable->getClave(), ':Nombre' => $UnidadResponsable->getNombre(), ':UnidadPresupuestal' => $UnidadResponsable->getUnidadPresupuestal(), ':OtrosNombres' => $UnidadResponsable->getOtrosNombres()));
       $UnidadResponsable->setId($this->_dbh->lastInsertId());
     } catch (Exception $e) {
       var_dump($e);
@@ -18,10 +18,10 @@ class DaoUnidadResponsable extends np_base{
   }
 
   public function update(UnidadResponsable $UnidadResponsable){
-    $sql="UPDATE UnidadResponsable SET Clave=:Clave, Nombre=:Nombre, UnidadPresupuestal=:UnidadPresupuestal WHERE  Id=:Id;";
+    $sql="UPDATE UnidadResponsable SET Clave=:Clave, Nombre=:Nombre, UnidadPresupuestal=:UnidadPresupuestal, OtrosNombres=:OtrosNombres WHERE  Id=:Id;";
     try {
       $sth=$this->_dbh->prepare($sql);
-      $sth->execute(array(':Id' => $UnidadResponsable->getId(), ':Clave' => $UnidadResponsable->getClave(), ':Nombre' => $UnidadResponsable->getNombre(), ':UnidadPresupuestal' => $UnidadResponsable->getUnidadPresupuestal()));
+      $sth->execute(array(':Id' => $UnidadResponsable->getId(), ':Clave' => $UnidadResponsable->getClave(), ':Nombre' => $UnidadResponsable->getNombre(), ':UnidadPresupuestal' => $UnidadResponsable->getUnidadPresupuestal(), ':OtrosNombres' => $UnidadResponsable->getOtrosNombres()));
     } catch (Exception $e) {
       var_dump($e);
       echo($sql);
@@ -104,6 +104,7 @@ class DaoUnidadResponsable extends np_base{
     $UnidadResponsable->setClave($row['Clave']);
     $UnidadResponsable->setNombre($row['Nombre']);
     $UnidadResponsable->setUnidadPresupuestal($row['UnidadPresupuestal']);
+    $UnidadResponsable->setOtrosNombres($row['OtrosNombres']);
     if(isset($row['Monto'])){
       $UnidadResponsable->setMonto($row['Monto']);
     }
@@ -138,6 +139,50 @@ class DaoUnidadResponsable extends np_base{
     $resp=array();
     foreach($sth->fetchAll() as $row){
       array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
+  public function searchByEstado($Buscar,$Estado){
+    $sql="SELECT UnidadResponsable.* FROM UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE UnidadResponsable.Clave LIKE '%$Buscar%' AND Estado=$Estado";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    if(count($resp)==0){
+      $sql="SELECT UnidadResponsable.* FROM UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE UnidadResponsable.Nombre LIKE '%$Buscar%' AND Estado=$Estado";
+      try {
+        $sth=$this->_dbh->prepare($sql);
+        $sth->execute();
+      } catch (Exception $e) {
+        var_dump($e);
+        echo($sql);
+      }
+      $resp=array();
+      foreach($sth->fetchAll() as $row){
+        array_push($resp,$this->createObject($row));
+      }
+    }
+    if(count($resp)==0){
+      $sql="SELECT UnidadResponsable.* FROM UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE UnidadResponsable.OtrosNombres LIKE '%$Buscar%' AND Estado=$Estado";
+      try {
+        $sth=$this->_dbh->prepare($sql);
+        $sth->execute();
+      } catch (Exception $e) {
+        var_dump($e);
+        echo($sql);
+      }
+      $resp=array();
+      foreach($sth->fetchAll() as $row){
+        array_push($resp,$this->createObject($row));
+      }
     }
     return $resp;
   }

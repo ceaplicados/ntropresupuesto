@@ -1,36 +1,31 @@
 <?php
-class UnidadResponsable {
+class MetasODS {
 
   public $Id;
+  public $ODS;
   public $Clave;
   public $Nombre;
-  public $UnidadPresupuestal;
-  public $OtrosNombres;
   public $Monto;
 
   function __construct() {
     $this->Id = NULL;
+    $this->ODS = NULL;
     $this->Clave = NULL;
     $this->Nombre = NULL;
-    $this->UnidadPresupuestal = NULL;
-    $this->OtrosNombres=NULL;
     $this->Monto = NULL;
   }
 
   public function getId(){
     return $this->Id;
   }
+  public function getODS(){
+    return $this->ODS;
+  }
   public function getClave(){
     return $this->Clave;
   }
   public function getNombre(){
     return $this->Nombre;
-  }
-  public function getUnidadPresupuestal(){
-    return $this->UnidadPresupuestal;
-  }
-  public function getOtrosNombres(){
-    return $this->OtrosNombres;
   }
   public function getMonto(){
     return $this->Monto;
@@ -39,18 +34,16 @@ class UnidadResponsable {
   public function setId($Id){
     return $this->Id=$Id;
   }
+  public function setODS($ODS){
+    return $this->ODS=$ODS;
+  }
   public function setClave($Clave){
     return $this->Clave=$Clave;
   }
   public function setNombre($Nombre){
     return $this->Nombre=$Nombre;
   }
-  public function setUnidadPresupuestal($UnidadPresupuestal){
-    return $this->UnidadPresupuestal=$UnidadPresupuestal;
-  }
-  public function setOtrosNombres($OtrosNombres){
-    return $this->OtrosNombres=$OtrosNombres;
-  }
+  
   public function setMonto($Monto){
     return $this->Monto=$Monto;
   }

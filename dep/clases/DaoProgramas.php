@@ -22,7 +22,7 @@ class DaoProgramas extends np_base{
   }
 
   public function update(Programas $Programas){
-    $sql="UPDATE Programas SET Clave=:Clave, Nombre=:Nombre, UnidadResponsable=:UnidadResponsable, ODS=:ODS, MetaODS=:MetaODS, Data=:Data) WHERE  Id=:Id;";
+    $sql="UPDATE Programas SET Clave=:Clave, Nombre=:Nombre, UnidadResponsable=:UnidadResponsable, ODS=:ODS, MetaODS=:MetaODS, Data=:Data WHERE  Id=:Id;";
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute(array(':Id' => $Programas->getId(), ':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable(), ':ODS' => $Programas->getODS(), ':MetaODS' => $Programas->getMetaODS(), ':Data' => $Programas->getData()));
