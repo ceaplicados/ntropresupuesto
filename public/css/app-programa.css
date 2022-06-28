@@ -1,0 +1,27 @@
+ul#metricas {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+ul#metricas li {
+	border: solid 1px #efefef;
+	margin: 5px;
+	vertical-align: top;
+	padding: 1em;
+	width: 23em;
+	display: inline-block;
+}
+
+ul#metricas li p.nombre {
+	color: black;
+}
+ul#metricas li p.responsable {
+	text-align: right;
+	font-style: italic;
+}
+
+ul#metricas li p.medios {
+	font-size: .8em;
+	line-height: 1.5em;
+}
