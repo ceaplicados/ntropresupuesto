@@ -111,6 +111,23 @@ class DaoUnidadResponsable extends np_base{
     return $UnidadResponsable;
   }
   
+  public function getByClaveUnidadPresupuestal($Clave,$UnidadPresupuestal){
+    $sql="SELECT * FROM UnidadResponsable WHERE Clave='$Clave' AND UnidadPresupuestal=$UnidadPresupuestal;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $UnidadResponsable=new UnidadResponsable();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $UnidadResponsable=$this->createObject($result[0]);
+    }
+    return $UnidadResponsable;
+  }
+  
   public function getByUnidadPresupuestal($UnidadPresupuestal){
     $sql="SELECT * FROM UnidadResponsable WHERE UnidadPresupuestal=$UnidadPresupuestal";
     try {
@@ -189,6 +206,22 @@ class DaoUnidadResponsable extends np_base{
   
   public function getByEstado($Estado){
     $sql="SELECT UnidadResponsable.* FROM UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE Estado=$Estado";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
+  public function pendientesPresupuestoDDHHbyEstado($Estado){
+    $sql="SELECT UnidadResponsable.* FROM UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal JOIN (SELECT DISTINCT UnidadResponsable FROM Programas JOIN IndicadoresProgramas ON IndicadoresProgramas.Programa=Programas.Id LEFT JOIN PropuestaProgramaODS ON PropuestaProgramaODS.Programa=Programas.Id WHERE PropuestaProgramaODS.Id IS NULL) AS ProgramasConIndicadores ON ProgramasConIndicadores.UnidadResponsable=UnidadResponsable.Id WHERE Estado=$Estado";
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();

@@ -119,6 +119,22 @@ class DaoMetasODS extends np_base{
     return $MetasODS;
   }
   
+  public function getByODS($ODS){
+    $sql="SELECT * FROM MetasODS WHERE ODS=$ODS";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
   public function buscarMetaByODS($Buscar,$ODS=NULL){
     $sql="SELECT MetasODS.*, CONCAT(Clave,Nombre) AS Buscar FROM MetasODS WHERE Buscar LIKE '%$Buscar%'";
     if($ODS!==NULL){

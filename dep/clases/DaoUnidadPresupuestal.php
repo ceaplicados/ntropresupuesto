@@ -110,6 +110,23 @@ class DaoUnidadPresupuestal extends np_base{
     return $UnidadPresupuestal;
   }
   
+  public function getByClaveEstado($Clave,$Estado){
+    $sql="SELECT * FROM UnidadPresupuestal WHERE Clave='$Clave' AND Estado=$Estado";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $UnidadPresupuestal=new UnidadPresupuestal();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $UnidadPresupuestal=$this->createObject($result[0]);
+    }
+    return $UnidadPresupuestal;
+  }
+  
   public function getByEstado($Estado){
     $sql="SELECT * FROM UnidadPresupuestal WHERE Estado=$Estado";
     try {

@@ -204,7 +204,7 @@ class DaoProgramas extends np_base{
   }
   
   public function sinPropuestaODS($UR=null,$limit=null,$offset=null){
-    $sql="SELECT Programas.* FROM Programas LEFT JOIN PropuestaProgramaODS ON PropuestaProgramaODS.Programa=Programas.Id WHERE UnidadResponsable=$UR AND PropuestaProgramaODS.Id IS NULL";
+    $sql="SELECT DISTINCT Programas.* FROM Programas JOIN IndicadoresProgramas ON IndicadoresProgramas.Programa=Programas.Id LEFT JOIN PropuestaProgramaODS ON PropuestaProgramaODS.Programa=Programas.Id WHERE UnidadResponsable=$UR AND PropuestaProgramaODS.Id IS NULL";
     if($limit!==null){
       $sql.=" LIMIT $limit";
       if($offset!==null){

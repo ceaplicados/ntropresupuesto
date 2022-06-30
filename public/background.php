@@ -691,6 +691,54 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 				}
 				echo(json_encode($resp));
 			}
+			
+		}
+		if($_POST['action']=="getProgramasByURSinODS"){
+			$resp=array();
+			$resp['UR']=$DaoUnidadResponsable->show($_POST['UR']);
+			$resp['UP']=$DaoUnidadPresupuestal->show($resp['UR']->getUnidadPresupuestal());
+			$resp['Programas']=$DaoProgramas->sinPropuestaODS($_POST['UR']);
+			echo(json_encode($resp));
+		}
+		if($_POST['action']=="getMetasODS"){
+			require_once("../dep/clases/DaoMetasODS.php");
+			$DaoMetasODS=new DaoMetasODS();
+			$resp=$DaoMetasODS->getByODS($_POST['ODS']);
+			echo(json_encode($resp));
+		}
+		if($_POST['action']=="guardarPropuestaODS"){
+			require_once("../dep/clases/DaoPropuestaProgramaODS.php");
+			require_once("../dep/clases/DaoPropuestaODSs.php");
+			require_once("../dep/clases/DaoPropuestaMetas.php");
+			$DaoPropuestaProgramaODS=new DaoPropuestaProgramaODS();
+			$DaoPropuestaODSs=new DaoPropuestaODSs();
+			$DaoPropuestaMetas=new DaoPropuestaMetas();
+			
+			$PropuestaProgramaODS=new PropuestaProgramaODS();
+			$PropuestaProgramaODS->setPrograma($_POST['Programa']);
+			$PropuestaProgramaODS->setUsuario($Usuario->getId());
+			$PropuestaProgramaODS->setDatePropuesta(date("Y-m-d H:i:s"));
+			$PropuestaProgramaODS->setTipoPropuesta('Inicial');
+			$PropuestaProgramaODS->setArgumentacion($_POST['Argumentacion']);
+			$PropuestaProgramaODS=$DaoPropuestaProgramaODS->add($PropuestaProgramaODS);
+			
+			foreach($_POST['ODSs'] as $ODS){
+				$PropuestaODSs=new PropuestaODSs();
+				$PropuestaODSs->setPropuesta($PropuestaProgramaODS->getId());
+				$PropuestaODSs->setODS($ODS);
+				$PropuestaODSs->setPrincipal(0);
+				if($ODS==$_POST['ODSppal']){
+					$PropuestaODSs->setPrincipal(1);
+				}
+				$PropuestaODSs=$DaoPropuestaODSs->add($PropuestaODSs);
+			}
+			foreach($_POST['Metas'] as $Meta){
+				$PropuestaMetas=new PropuestaMetas();
+				$PropuestaMetas->setPropuesta($PropuestaProgramaODS->getId());
+				$PropuestaMetas->setMeta($Meta);
+				$PropuestaMetas=$DaoPropuestaMetas->add($PropuestaMetas);
+			}
+			echo(json_encode($PropuestaProgramaODS));
 		}
 	}
 }else{

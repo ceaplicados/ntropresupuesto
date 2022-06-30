@@ -1,0 +1,149 @@
+img.metaODS {
+	max-width: 7em;
+	margin: 2px;
+}
+.indicadorPropuesta {
+	background: #efefef;
+	margin: 2px;
+	height: .5em;
+}
+
+#indicadoresPropuesta{
+	display: none;
+}
+#interfazPropuesta.paso1 #do_comenzarPropuesta, #interfazPropuesta.paso2 #do_comenzarPropuesta, #interfazPropuesta.paso3 #do_comenzarPropuesta, #interfazPropuesta.paso4 #do_comenzarPropuesta{
+	display: none;
+}
+#interfazPropuesta.paso1 #indicadoresPropuesta, #interfazPropuesta.paso2 #indicadoresPropuesta, #interfazPropuesta.paso3 #indicadoresPropuesta, #interfazPropuesta.paso4 #indicadoresPropuesta{
+	display: block;
+}
+
+#paso1, #paso2, #paso3, #paso4{
+	transition: .15s ease-in-out;
+	max-height: 0px;
+	overflow: hidden;
+}
+#interfazPropuesta.paso1 .indicadorPropuesta.paso1{
+	background: #696969;
+}
+#interfazPropuesta.paso1 #paso1{
+	max-height: 200em;
+	overflow: unset;
+}
+#unidadesResponsables{
+	list-style: none;
+	border: solid 1px #efefef;
+	border-bottom: none;
+	margin: 0px;
+	padding: 0px;
+}
+#unidadesResponsables li{
+	border-bottom: solid 1px #efefef;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#unidadesResponsables li:hover{
+	background: #ef004f;
+	color: white;
+}
+#interfazPropuesta.paso2 #paso2{
+	max-height: 200em;
+	overflow: unset;
+}
+#interfazPropuesta.paso2 .indicadorPropuesta.paso1{
+	background: #ef004f;
+}
+#interfazPropuesta.paso2 .indicadorPropuesta.paso2{
+	background: #696969;
+}
+#paso2 h6 span.ur{
+	font-style: italic;
+}
+ul#programasUR {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+ul#programasUR li {
+	display: inline-block;
+	vertical-align: bottom;
+	margin: 4px;
+	padding: 1em;
+	border: solid 1px #efefef;
+	border-radius: 3px;
+	width: 25em;
+	min-height: 10em;
+}
+#interfazPropuesta.paso3 .indicadorPropuesta.paso1, #interfazPropuesta.paso3 .indicadorPropuesta.paso2{
+	background: #ef004f;
+}
+#interfazPropuesta.paso3 .indicadorPropuesta.paso3{
+	background: #696969;
+}
+#interfazPropuesta.paso3 #paso3{
+	max-height: 200em;
+	overflow: unset;
+}
+#paso3 p.programa {
+	text-align: center;
+	font-size: 1.25em;
+}
+
+#paso3 .ODSs img.ODS {
+	display: inline-block;
+	max-width: 9em;
+	margin: 2px;
+	cursor: pointer;
+	filter: grayscale(1) opacity(0.4);
+	transition: .15s ease-in-out;
+}
+#paso3 .ODSs img.ODS:hover {
+	filter: grayscale(.5) opacity(0.4);
+}
+#paso3 .ODSs img.ODS.metaSelected {
+	filter: grayscale(.7) opacity(0.6);
+}
+#paso3 .ODSs img.ODS.selected {
+	filter: none;
+}
+#paso3 .metasODSs p {
+	margin-bottom: 0px;
+}
+
+#paso3 div#ODSseleccionados {
+	margin-bottom: .5em;
+}
+#paso3 div#ODSseleccionados img {
+	max-width: 5em;
+	margin: 2px;
+}
+#interfazPropuesta.paso4 .indicadorPropuesta.paso1, #interfazPropuesta.paso4 .indicadorPropuesta.paso2, #interfazPropuesta.paso4 .indicadorPropuesta.paso3{
+	background: #ef004f;
+}
+#interfazPropuesta.paso4 .indicadorPropuesta.paso4{
+	background: #696969;
+}
+#interfazPropuesta.paso4 #paso4{
+	max-height: 200em;
+	overflow: unset;
+}
+#paso4 p.programa {
+	text-align: center;
+	font-size: 1.25em;
+}
+#paso4 .instruccionPrincipal{
+	color: black;
+}
+#paso4 div#ODSseleccionadosConfirm img {
+	display: inline-block;
+	max-width: 10em;
+	margin: 2px;
+	cursor: pointer;
+	position: relative;
+}
+#paso4 div#ODSseleccionadosConfirm img.selected {
+	border: 3px solid #dd10ad;
+	box-shadow: 2px 2px 3px;
+}
