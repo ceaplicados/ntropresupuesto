@@ -23,7 +23,7 @@ Además el presupuesto de cada entidad para cada año tiene varias versiones o m
 - Navegación entre entidades y clasificaciones presupuestales.
 - API para consumo de los datos.
 - Indexación en buscadores de los datos agregados.
-- Clasificación presupeustal con perspectiva de derechos humanos.
+- Clasificación colectiva presupuestal con perspectiva de derechos humanos.
 - Cuadernos de trabajo para el estudio colaborativo de los presupuestos.
 
 *Todos los datos deberán de presentarse deflactados, es decir, quitando el efecto de la pérdida de valor del dinero derivada de la inflación tomando un año como referencia para afectar el valor de sus años precedentes y/o posteriores.*
