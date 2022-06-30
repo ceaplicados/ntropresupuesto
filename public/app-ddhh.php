@@ -1,6 +1,5 @@
 <?php
 require_once("../dep/interface.php");
-$Usuario=$DaoUsuarios->show(1);
 require_once("../dep/clases/DaoUnidadResponsable.php");
 $DaoUnidadResponsable=new DaoUnidadResponsable();
 

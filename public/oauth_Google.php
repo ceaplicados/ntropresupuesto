@@ -78,7 +78,7 @@ if(strlen($_GET['code'])>0){
 			$Session->setUsuario($Usuario->getId());
 			$Session->setDateBorn(date("Y-m-d H:i:s"));
 			$Session->setDateDeath(date("Y-m-d H:i:s",strtotime("+48 hours")));
-			$Session->setId($DaoSessions->add($Session));
+			$Session=$DaoSessions->add($Session);
 		}
 	}else{
 		if(isset($_COOKIE["SessionUID"])){
@@ -114,7 +114,7 @@ if(strlen($_GET['code'])>0){
 				$Usuario->setActivo(1);
 				$Usuario->setImage($image);
 				$Usuario->setUUID($DaoUsuarios->nonce());
-				$Usuario->setId($DaoUsuarios->add($Usuario));
+				$Usuario=$DaoUsuarios->add($Usuario);
 			}
 			// Crear sessión nueva
 			$Session = new Sessions();
@@ -122,7 +122,7 @@ if(strlen($_GET['code'])>0){
 			$Session->setUsuario($Usuario->getId());
 			$Session->setDateBorn(date("Y-m-d H:i:s"));
 			$Session->setDateDeath(date("Y-m-d H:i:s",strtotime("+48 hours")));
-			$Session->setId($DaoSessions->add($Session));
+			$Session=$DaoSessions->add($Session);
 		}
 		
 		// poner tokens
@@ -134,7 +134,7 @@ if(strlen($_GET['code'])>0){
 		$oAuths->setRefreshKey($tokens->refresh_token);
 		$oAuths->setDateBorn(date("Y-m-d H:i:s"));
 		$oAuths->setNeedsReauthorization(0);
-		$oAuths->setId($DaooAuths->add($oAuths));
+		$oAuths=$DaooAuths->add($oAuths);
 	}
 	
 	// poner cookie de sesión
