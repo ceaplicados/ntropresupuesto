@@ -147,3 +147,24 @@ ul#programasUR li {
 	border: 3px solid #dd10ad;
 	box-shadow: 2px 2px 3px;
 }
+
+#misPropuestas tr.sinPropuestas {
+	font-style: italic;
+	text-align: center;
+}
+#misPropuestas td.programa b{
+	display: block;
+}
+#misPropuestas td.programa b a {
+	margin-left: .5em;
+}
+table#misPropuestas td.ODS img {
+	max-width: 4em;
+	margin: 2px;
+}
+
+table#misPropuestas td.ODS span {
+	display: block;
+	margin-bottom: .5em;
+	font-size: .9em;
+}

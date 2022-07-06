@@ -691,6 +691,45 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 				}
 				echo(json_encode($resp));
 			}
+			/*
+				app-ddhh.php
+			*/
+			if($_POST['action']=="getPropuestasUsuario"){
+				require_once("../dep/clases/DaoPropuestaProgramaODS.php");
+				require_once("../dep/clases/DaoPropuestaODSs.php");
+				require_once("../dep/clases/DaoPropuestaMetas.php");
+				require_once("../dep/clases/DaoMetasODS.php");
+				$DaoPropuestaProgramaODS=new DaoPropuestaProgramaODS();
+				$DaoPropuestaODSs=new DaoPropuestaODSs();
+				$DaoPropuestaMetas=new DaoPropuestaMetas();
+				$DaoMetasODS=new DaoMetasODS();
+				$resp=array();
+				$Propuestas=$DaoPropuestaProgramaODS->getByUsuario($Usuario->getId());
+				$resp['Propuestas']=array();
+				$resp['Programas']=array();
+				$resp['URs']=array();
+				$resp['Metas']=array();
+				foreach($Propuestas as $Propuesta){
+					$Propuesta->setODS($DaoPropuestaODSs->getByPropuesta($Propuesta->getId()));
+					$Propuesta->setMetas($DaoPropuestaMetas->getByPropuesta($Propuesta->getId()));
+					array_push($resp['Propuestas'], $Propuesta);
+					if(!isset($resp['Programas'][$Propuesta->getPrograma()])){
+						$resp['Programas'][$Propuesta->getPrograma()]=$DaoProgramas->show($Propuesta->getPrograma());
+					}
+					if(!isset($resp['URs'][$resp['Programas'][$Propuesta->getPrograma()]->getUnidadResponsable()])){
+						$UR=$DaoUnidadResponsable->show($resp['Programas'][$Propuesta->getPrograma()]->getUnidadResponsable());
+						$UP=$DaoUnidadPresupuestal->show($UR->getUnidadPresupuestal());
+						$UR->setClave($UP->getClave()."-".$UR->getClave());
+						$resp['URs'][$resp['Programas'][$Propuesta->getPrograma()]->getUnidadResponsable()]=$UR;
+					}
+					foreach($Propuesta->getMetas() as $Meta){
+						if(!isset($resp['Metas'][$Meta->getMeta()])){
+							$resp['Metas'][$Meta->getMeta()]=$DaoMetasODS->show($Meta->getMeta());
+						}
+					}
+				}
+				echo(json_encode($resp));
+			}
 			
 		}
 		if($_POST['action']=="getProgramasByURSinODS"){

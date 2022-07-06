@@ -29,7 +29,6 @@ if($Session->getUsuario()>0){
 }else{
 	$Usuario=new Usuarios();
 }
-
 function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 	global $file_script,$Usuario,$DaoEstados,$EstadoUsuario;
 	if($title!==""){
@@ -67,7 +66,7 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 	<link rel="stylesheet" href="/css/main.css" class="color-switcher-link">
 	<link rel="stylesheet" href="/css/dashboard.css" class="color-switcher-link">
 	<?php if(file_exists("css/$file_script.css")){ ?>
-	<link rel="stylesheet" href="/css/<?php echo($file_script); ?>.css">
+	<link rel="stylesheet" href="/css/<?php echo($file_script); ?>.css?v=2022.07.06">
 	<?php } ?>
 	
 	<script src="https://kit.fontawesome.com/aa9a577cfb.js" crossorigin="anonymous"></script>
@@ -687,7 +686,7 @@ function footerPageAdmin(){
 
 <!-- dashboard init -->
 <?php if(file_exists("js/$file_script.js")){ ?>
-	<script src="/js/<?php echo($file_script); ?>.js"></script>
+	<script src="/js/<?php echo($file_script); ?>.js?v=2022.07.06"></script>
 <?php } ?>
 </body>
 

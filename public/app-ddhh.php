@@ -1,7 +1,9 @@
 <?php
 require_once("../dep/interface.php");
 require_once("../dep/clases/DaoUnidadResponsable.php");
+require_once("../dep/clases/DaoPropuestaProgramaODS.php");
 $DaoUnidadResponsable=new DaoUnidadResponsable();
+$DaoPropuestaProgramaODS=new DaoPropuestaProgramaODS();
 
 $descripcion="Ejercicio colaborativo para clasificar los programas presupuestales de acuerdo a los Objetivos de Desarrollo Sostenible.";
 $tags=array();
@@ -142,13 +144,30 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<div class="col-md-12">
 				<h4>Revisa las propuestas de la comunidad</h4>
 			</div>
+			-->
 			<div class="col-md-12">
 				<hr/>
 			</div>
 			<div class="col-md-12">
-				<h4>Mi historial</h4>
+				<h4>Mis propuestas</h4>
+				<table class="table" id="misPropuestas">
+					<thead>
+						<tr>
+							<th>Fecha</th>
+							<th>Programa</th>
+							<th>ODS y metas</th>
+							<th>Justificación</th>
+							<th>Estatus</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="sinPropuestas">
+							<td colspan="5">Sin propuestas</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-		-->
+		
 		</div>
 		<?php }else{ ?>
 		<div class="row">

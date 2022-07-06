@@ -2,6 +2,7 @@ $(document).ready(function(){
 	setTimeout(function(){
 		$("header").toggleClass('active-slide-side-header');
 	},1000);
+	getPropuestasUsuario();
 });
 
 function setPasoPropuesta(paso){
@@ -187,4 +188,49 @@ function do_guardarPropuesta(){
 			},"json")
 		}
 	}
+}
+
+function getPropuestasUsuario(){
+	var params=new Object();
+	params.action="getPropuestasUsuario";
+	$.post("/backend",params,function(resp){
+		/*
+		<tr>
+			<th>Fecha</th>
+			<th>Programa</th>
+			<th>ODSs y metas</th>
+			<th>Justificación</th>
+			<th>Estatus</th>
+		</tr>
+		*/
+		if(resp.Propuestas.length>0){
+			$("#misPropuestas tbody tr.sinPropuestas").remove();
+			for (i = 0; i < resp.Propuestas.length; i++) {
+			  if($('#misPropuestas tbody tr[data-id="'+resp.Propuestas[i].Id+'"]').length==0){
+				var ODS='';
+				var metas='';
+				for (let j = 0; j < resp.Propuestas[i].ODS.length; j++) {
+					ppal='';
+					if(resp.Propuestas[i].ODS[j].Principal==1){
+						ppal=' principal';
+					}
+					ODS+='<img src="/imgs/ODS/S-WEB-Goal-'+resp.Propuestas[i].ODS[j].ODS+'.png" class="ODS'+ppal+'" data-id="'+resp.Propuestas[i].ODS[j].ODS+'"/>'
+				}
+				for (let j = 0; j < resp.Propuestas[i].Metas.length; j++) {
+					metas+='<span data-id="'+resp.Propuestas[i].Metas[j].Id+'"><b>'+resp.Metas[resp.Propuestas[i].Metas[j].Meta].Clave+'</b> '+resp.Metas[resp.Propuestas[i].Metas[j].Meta].Nombre+'</span>';
+				}
+				$("#misPropuestas tbody").append('<tr data-id="'+resp.Propuestas[i].Id+'">'
+					+'<td>'+formatFecha(resp.Propuestas[i].DatePropuesta)+'</td>'
+					+'<td class="programa"><b>'+resp.URs[resp.Programas[resp.Propuestas[i].Programa].UnidadResponsable].Clave+'-'+resp.Programas[resp.Propuestas[i].Programa].Clave+' <a target="_blank" href="/JAL/programa/'+resp.URs[resp.Programas[resp.Propuestas[i].Programa].UnidadResponsable].Clave+'-'+resp.Programas[resp.Propuestas[i].Programa].Clave+'"><i class="fa fa-external-link" aria-hidden="true"></i></a></b> '+resp.Programas[resp.Propuestas[i].Programa].Nombre+'</td>'
+					+'<td class="ODS">'+ODS+metas+'</td>'
+					+'<td class="justificacion">'+resp.Propuestas[i].Argumentacion+'</td>'
+					+'<td class="estatus">'+resp.Propuestas[i].TipoPropuesta+'</td>'
+					+'</tr>');
+			  }
+			}
+		}else{
+			$("#misPropuestas tbody").html('<tr class="sinPropuestas"><td colspan="5">Sin propuestas</td></tr>');
+		}
+		
+	},"json");
 }
