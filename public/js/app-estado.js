@@ -1,11 +1,3 @@
-_colores=new Array();
-_colores[0]="#BFCA4D";
-_colores[1]="#8CB4C1";
-_colores[2]="#95AB82";
-_colores[3]="#BD905B";
-_colores[4]="#D95B5B";
-_colores[5]="#8162B4";
-
 var totalPresupuesto=0;
 $(document).ready(function(){
 	setTimeout(function(){
@@ -141,7 +133,7 @@ $(document).ready(function(){
 			$("#tablaMontos tbody").append('<tr data-id="'+resp.UR[i].Id+'">'
 			+'<td class="hidden">'+resp.UP[resp.UR[i].UnidadPresupuestal].Nombre+' </td>'
 			+'<td class="clave">'+resp.UP[resp.UR[i].UnidadPresupuestal].Clave+'-'+resp.UR[i].Clave+'</td>'
-			+'<td class="nombre">'+resp.UR[i].Nombre+' <a href="app-ur?u='+resp.UR[i].Id+'&i='+$("#paramINPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'
+			+'<td class="nombre">'+resp.UR[i].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/ur/'+resp.UP[resp.UR[i].UnidadPresupuestal].Clave+'-'+resp.UR[i].Clave+'?i='+$("#paramINPC").val()+'&v='+$("#paramVersion").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'
 			+'<td class="monto" data-monto="'+resp.UR[i].Monto+'">'+number_format(resp.UR[i].Monto)+'</td>'
 			+'<td class="porcentaje"></td><td class="porcentajeFiltrado"></td>'
 			+'</tr>');
@@ -500,9 +492,10 @@ function buscarPrograma(){
 				$("#tablaProgramas tbody").html('')
 				if(resp.programas.length>0){
 					for (i = 0; i < resp.programas.length; i++){
-						unidadResponsable=resp.URs[resp.programas[i].UnidadResponsable]
-						unidadResponsable=resp.UPs[unidadResponsable.UnidadPresupuestal].Clave+"-"+unidadResponsable.Clave+' '+unidadResponsable.Nombre+''
-						$("#tablaProgramas tbody").append('<tr data-id="'+resp.programas[i].Id+'"><td><span class="colorDot"></span></td><td>'+resp.programas[i].Clave+'</td><td>'+resp.programas[i].Nombre+'</td><td class="unidadResponsable">'+unidadResponsable+' <a href="app-ur?u='+resp.programas[i].UnidadResponsable+'&i='+$("#paramINPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td><td></td><td><a href="app-pp?p='+resp.programas[i].Id+'&i='+$("#paramINPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td></tr>')
+						unidadResponsable=resp.URs[resp.programas[i].UnidadResponsable];
+						claveUnidadResponsable=resp.UPs[unidadResponsable.UnidadPresupuestal].Clave+"-"+unidadResponsable.Clave;
+						unidadResponsable=resp.UPs[unidadResponsable.UnidadPresupuestal].Clave+"-"+unidadResponsable.Clave+' '+unidadResponsable.Nombre+'';
+						$("#tablaProgramas tbody").append('<tr data-id="'+resp.programas[i].Id+'"><td><span class="colorDot"></span></td><td>'+resp.programas[i].Clave+'</td><td>'+resp.programas[i].Nombre+'</td><td class="unidadResponsable">'+unidadResponsable+' <a href="/'+$('#paramCodigoEstado').val()+'/ur/'+claveUnidadResponsable+'?i='+$("#paramINPC").val()+'&v='+$("#paramVersion").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td><td></td><td><a href="/'+$('#paramCodigoEstado').val()+'/programa/'+claveUnidadResponsable+'-'+resp.programas[i].Clave+'?i='+$("#paramINPC").val()+'&v='+$("#paramVersion").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td></tr>')
 					}
 				}else{
 					$("#tablaProgramas tbody").html('<tr><td colspan="5">No se localizaron programas</td></tr>')

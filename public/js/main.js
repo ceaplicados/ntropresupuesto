@@ -1448,3 +1448,23 @@ $('th').click(function() {
 	});
 	return false;
 });
+
+var _colores=new Array();
+_colores[0]="#BFCA4D";
+_colores[1]="#8CB4C1";
+_colores[2]="#95AB82";
+_colores[3]="#BD905B";
+_colores[4]="#D95B5B";
+_colores[5]="#995ED4";
+_colores[6]="#56CCF2";
+_colores[7]="#8162B4";
+_colores[8]="#F2C94C";
+_colores[9]="#C71616";
+
+var _colores_a=new Array();
+_colores_a[0]="rgba(191, 202, 77, 0.5)";
+_colores_a[1]="rgba(140, 180, 193, 0.5)";
+_colores_a[2]="rgba(149, 171, 130, 0.5)";
+_colores_a[3]="rgba(189, 144, 91, 0.5)";
+_colores_a[4]="rgba(217, 91, 91, 0.5)";
+_colores_a[5]="rgba(129, 98, 180, 0.5)";

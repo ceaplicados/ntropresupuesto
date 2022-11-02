@@ -119,17 +119,6 @@ function toogleGraph(Obj){
 	},"json")
 }
 var canvasChart, chartDatos;
-var _colores=new Array();
-_colores[0]="#BFCA4D";
-_colores[1]="#8CB4C1";
-_colores[2]="#95AB82";
-_colores[3]="#BD905B";
-_colores[4]="#D95B5B";
-_colores[5]="#995ED4";
-_colores[6]="#56CCF2";
-_colores[7]="#8162B4";
-_colores[8]="#F2C94C";
-_colores[9]="#C71616";
 
 function updateGraph(){
 	var labels=new Array();

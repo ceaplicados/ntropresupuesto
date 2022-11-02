@@ -1,17 +1,3 @@
-_colores=new Array();
-_colores[0]="#BFCA4D";
-_colores[1]="#8CB4C1";
-_colores[2]="#95AB82";
-_colores[3]="#BD905B";
-_colores[4]="#D95B5B";
-_colores[5]="#8162B4";
-_colores_a=new Array();
-_colores_a[0]="rgba(191, 202, 77, 0.5)";
-_colores_a[1]="rgba(140, 180, 193, 0.5)";
-_colores_a[2]="rgba(149, 171, 130, 0.5)";
-_colores_a[3]="rgba(189, 144, 91, 0.5)";
-_colores_a[4]="rgba(217, 91, 91, 0.5)";
-_colores_a[5]="rgba(129, 98, 180, 0.5)";
 var aniosFed=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022];
 
 $(document).ready(function() {

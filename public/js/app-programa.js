@@ -6,7 +6,6 @@ $(document).ready(function(){
 	params.PP=$("#paramPP").val()
 	params.INPC=$("#paramINPC").val()
 	$.post("/backend",params,function(resp){
-		console.log(resp)
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		for (i = 0; i < resp.versiones.length; i++){

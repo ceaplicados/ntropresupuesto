@@ -1,0 +1,74 @@
+div#contenedorGraficas canvas{
+	height: calc(100vh - 10em);
+}
+.canvas-chart-donut-unidad-presupuestaria{
+	height: calc(100vh - 15em);
+}
+table .monto, table .porcentaje{
+	text-align: right;
+}
+#tablaProgramas{
+	margin-top: 1em;
+}
+#tablaProgramas tr.hide {
+	display: none;
+}
+#tablaProgramas .hidden{
+	display: none;
+}
+#tablaProgramas .monto{
+	text-align: right;
+}
+#tablaProgramas tbody tr:hover{
+	cursor: pointer;
+	color: black;
+	background: #DDDDDD;
+}
+#tablaProgramas tbody tr i.fa-chevron-circle-right{
+	color: teal;
+	margin-left: .5em;
+}
+#tablaProgramas tfoot {
+	font-weight: bold;
+	border-top: black 2px solid;
+}
+div#contenedorGraficas {
+	position: relative;
+	height: 100vh;
+}
+
+div#contenedorGraficas .with_border {
+	position: absolute;
+	top: 0px;
+	width: calc(100% - 1em);
+	height: calc(100% - 2em);
+	display: none;
+}
+div#contenedorGraficas[data-graph='all'] .with_border {
+	display: block;
+}
+div#contenedorGraficas[data-graph='barrasCG'] #barrasCG{
+	display: block;
+}
+div#contenedorGraficas[data-graph='lineasUR'] #lineasUR{
+	display: block;
+}
+div#contenedorGraficas[data-graph='variacionUR'] #variacionUR{
+	display: block;
+}
+div#contenedorGraficas[data-graph='variacionPorcentualUR'] #variacionPorcentualUR{
+	display: block;
+}
+
+div#contenedorGraficas .tiposGrafica {
+	position: absolute;
+	top: -3em;
+	left: 0px;
+}
+.tiposGrafica button.button {
+	padding: .5em;
+}
+
+.tiposGrafica button.button.active {
+	background: #ef004f;
+}

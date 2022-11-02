@@ -113,7 +113,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 				foreach($DaoCapitulosGasto->getPresupuestoByURVersion($_POST["UR"],$version->getId()) as $CapGasto){
 					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
 					$CapGasto->setMonto(round($CapGasto->getMonto()/$deflactor,2));
-					array_push($resp["resumen"][$version->getId()], $CapGasto);
+					$resp["resumen"][$version->getId()][$CapGasto->getId()]=$CapGasto;
 				}
 			}
 			echo(json_encode($resp));
