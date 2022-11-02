@@ -31,7 +31,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 				<h3 class="dashboard-page-title">Dashboard
 					<small>Gasto federalizado</small>
 				</h3>
-				<p>Miles de millones de pesos a valores del 2022.</p>
+				<p>Miles de millones de pesos a valores del 2023.</p>
 			</div>
 		</div>
 		<!-- .row -->
@@ -60,7 +60,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<!-- Composición del gasto federalizado -->
 				<div class="col-xs-12 col-md-6">
 					<div class="with_border with_padding">
-						<h4>Gasto federalizado 2022</h4>
+						<h4>Gasto federalizado 2023</h4>
 						<div class="canvas-chart-wrapper">
 							<canvas id="canvas-chart-donut-gasto-federalizado-composicion" class="canvas-chart-donut"></canvas>
 						</div>
