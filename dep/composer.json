@@ -1,0 +1,6 @@
+{
+	"require" : {
+		"daniel-zahariev/php-aws-ses" : "*",
+		"phpoffice/phpspreadsheet": "^1.23"
+	}
+}
