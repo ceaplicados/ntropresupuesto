@@ -10,9 +10,11 @@ $(document).ready(function(){
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		var DATA_CG=new Array();
-		
+		var totalesVersiones=new Array();
 		for (i = 0; i < resp.versiones.length; i++){
 			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre);
+			$('#tablaHistorico thead .anio').prepend('<th colspan="2" class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
+			$('#tablaHistorico thead .detalle').prepend('<th>$</th><th>%</th>');
 			var DataYearCP=new Array();
 			var total = 0;
 			if(resp.resumen[resp.versiones[i].Id]){
@@ -22,7 +24,30 @@ $(document).ready(function(){
 					}
 				}
 			}
+			totalesVersiones[resp.versiones[i].Id]=total;
+			if(resp.versiones[i].Id==$('#paramVersion').val()){
+				$('#montoTotal').html(number_format(total));
+			}
 			DATA_HIST.unshift(total);
+			$('#tablaHistorico tfoot tr').prepend('<td colspan="2" class="text-right">$ '+number_format(total,0)+'</td>');
+		}
+		$('#tablaHistorico tfoot tr').prepend('<td>Total</td>');
+		$('#tablaHistorico thead .anio').prepend('<th rowspan="2">Capítulo de gasto</th>');
+		for (let j = 0; j < resp.capitulos.length; j++) {
+			var rowAnio='';
+			for (i = 0; i < resp.versiones.length; i++){
+				if(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id]){
+					var porcentaje='';
+					if(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto>0){
+						porcentaje=resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto/totalesVersiones[resp.versiones[i].Id]*100;
+						porcentaje=porcentaje.toFixed(1)+'%';
+					}
+					rowAnio='<td class="text-right">$'+number_format(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto)+'</td><td>'+porcentaje+'</td>'+rowAnio;
+				}else{
+					rowAnio='<td></td><td></td>'+rowAnio;
+				}
+			}
+			$('#tablaHistorico tbody').append('<tr><td>'+resp.capitulos[j].Nombre+'</td>'+rowAnio+'</tr>');
 		}
 		for (let i = 0; i < resp.capitulos.length; i++) {
 			var DATASET=new Object();

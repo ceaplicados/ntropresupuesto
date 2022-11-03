@@ -9,13 +9,32 @@ $(document).ready(function(){
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		for (i = 0; i < resp.versiones.length; i++){
-			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre)
+			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre);
+			$('#tablaHistorico thead tr').prepend('<th>'+resp.versiones[i].Anio+'</th>');
 			if(resp.resumen[resp.versiones[i].Id]){
 				DATA_HIST.unshift(resp.resumen[resp.versiones[i].Id]);
+				$('#tablaHistorico tbody tr.montos').prepend('<td class="text-right">$ '+number_format(resp.resumen[resp.versiones[i].Id],0)+'</td>');
 			}else{
-				DATA_HIST.unshift(0)
+				DATA_HIST.unshift(0);
+				$('#tablaHistorico tbody tr.montos').prepend('<td>-</td>');
+			}
+			if(i < resp.versiones.length-1){
+				if(resp.resumen[resp.versiones[i+1].Id]>0){
+					var incremento=(resp.resumen[resp.versiones[i].Id]-resp.resumen[resp.versiones[i+1].Id])/resp.resumen[resp.versiones[i+1].Id]*100;
+					$('#tablaHistorico tbody tr.incremento').prepend('<td class="text-right">'+incremento.toFixed(1)+'%</td>');
+				}else{
+					$('#tablaHistorico tbody tr.incremento').prepend('<td>-</td>');
+				}
+			}else{
+				$('#tablaHistorico tbody tr.incremento').prepend('<td>-</td>');
+			}
+			if(resp.versiones[i].Id==$('#paramVersion').val()){
+				$('#montoTotal').html(number_format(resp.resumen[resp.versiones[i].Id]));
 			}
 		}
+		$('#tablaHistorico tbody tr.montos').prepend('<td>Presupuesto</td>');
+		$('#tablaHistorico tbody tr.incremento').prepend('<td>Variación</td>');
+		$('#tablaHistorico thead tr').prepend('<th></th>');
 		var $presupuestoFederalTotal = jQuery('.canvas-chart-line-programa-historico');
 		if ($presupuestoFederalTotal.length) {
 			$presupuestoFederalTotal.each(function(i){

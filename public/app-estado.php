@@ -64,7 +64,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb darklinks">
-					<li><a href="/">Dashboard</a></li>
+					<li><a href="/"><img src="/imgs/logo.svg" alt="Dashboard"/></a></li>
 					<li class="active"><?php echo($Estado->getNombre()); ?></li>
 				</ol>
 			</div>
@@ -107,6 +107,9 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<!-- .row -->
 		<div class="row">
 			<!-- Presupuesto total -->
+			<div class="col-xs-12 mb-3">
+				<p class="text-center">El presupuesto de <?php echo($Estado->getNombre()); ?> para el año <?php echo($versionActual->getAnio()); ?> es de $ <span id="montoTotal"></span>,<span class="small">a valores del <?php echo($INPCActual->getAnio()); ?></span></p>
+			</div>
 			<div class="col-xs-12">
 				<div class="with_border with_padding">
 					<h4>¿Quién se lo gasta?</h4>
@@ -118,21 +121,53 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<!-- .col-* -->
 
 			<!-- Histórico del gasto federalizado -->
-			<div class="col-xs-12 col-md-6">
+			<div class="col-xs-12">
 				<div class="with_border with_padding">
 					<h4>¿En qué se gasta?</h4>
-					<div class="canvas-chart-wrapper">
-						<canvas class="canvas-chart-donut-capitulos-gasto"></canvas>
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<div class="canvas-chart-wrapper">
+								<canvas class="canvas-chart-donut-capitulos-gasto"></canvas>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<table class="table mt-4" id="tablaOG">
+								<thead>
+									<tr>
+										<th>Capítulo de gasto</th>
+										<th>Presupuesto <?php echo($versionActual->getAnio()); ?></th>
+										<th>Porcentaje</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 			<!-- .col-* -->
 			<!-- Composición del gasto federalizado -->
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12">
 					<div class="with_border with_padding">
 						<h4>Histórico</h4>
-						<div class="canvas-chart-wrapper">
-							<canvas class="canvas-chart-line-presupuesto-historico"></canvas>
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="canvas-chart-wrapper mb-3">
+									<canvas class="canvas-chart-line-presupuesto-historico"></canvas>
+								</div>
+							</div>
+							<div class="col-xs-12 col-md-6">
+								<table class="table mt-4" id="tablaHistorico">
+									<thead>
+										<tr>
+											<th>Año</th>
+											<th>Presupuesto</th>
+											<th>Crecimiento</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -155,7 +190,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 								<th class="hidden">Texto</th>
 								<th class="selected ascendente">Clave <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 								<th>Unidad Responsable <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
-								<th>Monto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+								<th>Presupuesto  <?php echo($versionActual->getAnio()); ?><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 								<th>% total <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 								<th class="porcentajeFiltrado">% filtro <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 							</tr>
@@ -200,7 +235,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 										<th class="selected ascendente">Clave <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 										<th>Nombre <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 										<th>Unidad Responsable <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
-										<th>Monto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Presupuesto  <?php echo($versionActual->getAnio()); ?> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 										<th></th>
 									</tr>
 								</thead>

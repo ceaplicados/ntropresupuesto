@@ -16,7 +16,9 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
+table#tablaHistorico, table#tablaOG {
+	margin-top: 2em;
+}
 #chart{
 	height: calc(100vh - 4em);
 }

@@ -101,7 +101,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb darklinks">
-					<li><a href="/">Dashboard</a></li>
+					<li><a href="/"><img src="/imgs/logo.svg" alt="Dashboard"/></a></li>
 					<li><a href="/<?php echo($Estado->getCodigo()); ?>"><?php echo($Estado->getNombre()); ?></a></li>
 					<li class="active"><?php echo($UnidadPresupuestal->getClave()."-".$UnidadResponsable->getClave()." ".$UnidadResponsable->getNombre()); ?></li>
 				</ol>
@@ -145,6 +145,9 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<!-- .row -->
 		<div class="row">
 			<!-- Presupuesto total -->
+			<div class="col-xs-12 mb-3">
+				<p class="text-center">El presupuesto de <?php echo($UnidadResponsable->getNombre()); ?>, <?php echo($Estado->getNombre()); ?> para el año <?php echo($versionActual->getAnio()); ?> es de $ <span id="montoTotal"></span>, <span class="small">a valores del <?php echo($INPCActual->getAnio()); ?></span></p>
+			</div>
 			<div class="col-xs-12" id="contenedorGraficas" data-graph="all">
 				<div class="with_border with_padding" id="barrasCG">
 					<h4>Histórico por Capítulo de Gasto</h4>
@@ -178,6 +181,22 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<!-- .col-* -->
 		</div>
 		<div class="row">
+			<div class="col-xs-12">
+				<table id="tablaHistorico" class="table">
+					<thead>
+						<tr class="anio">
+						</tr>
+						<tr class="detalle">
+						</tr>
+					</thead>
+					<tbody></tbody>
+					<tfoot>
+						<tr class="total"></tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<div class="row">
 			<!-- Calendar -->
 			<div class="col-xs-12">
 				<div class="with_border with_padding">
@@ -188,7 +207,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 								<th class="hidden">Texto</th>
 								<th>Clave</th>
 								<th>Programa</th>
-								<th>Monto</th>
+								<th>Presupuesto  <?php echo($versionActual->getAnio()); ?></th>
 								<th>% total</th>
 								<th></th>
 							</tr>
@@ -244,7 +263,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 									<tr>
 										<th>Clave</th>
 										<th>Nombre</th>
-										<th>Monto</th>
+										<th>Presupuesto  <?php echo($versionActual->getAnio()); ?></th>
 										<th>Porcentaje</th>
 										<th></th>
 									</tr>

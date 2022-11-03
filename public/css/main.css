@@ -13120,6 +13120,9 @@ footer a.social-icon {
 	vertical-align: bottom;
 	transform: translateY(0.2em);
 }
+ol.breadcrumb img {
+	max-height: 2em;
+}
 
 div#toast {
 	position: fixed;

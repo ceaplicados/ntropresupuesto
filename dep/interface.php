@@ -29,8 +29,8 @@ if($Session->getUsuario()>0){
 }else{
 	$Usuario=new Usuarios();
 }
-$Usuario=$DaoUsuarios->show(1);
-$Session=$DaoSessions->show(65);
+//$Usuario=$DaoUsuarios->show(1);
+//$Session=$DaoSessions->show(65);
 function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 	global $file_script,$Usuario,$DaoEstados,$EstadoUsuario;
 	if($title!==""){
@@ -289,7 +289,6 @@ function headerPageAdmin($title="",$descripcion="",$thumb="",$tags=array()){
 					</form>
 				</div>
 				*/ ?>
-
 				<div class="pull-right big-header-buttons">
 					<ul class="inline-dropdown inline-block">
 

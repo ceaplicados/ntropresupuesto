@@ -218,7 +218,21 @@ class np_base extends np_bdd{
     if(strlen($centavos)<2){
       $centavos='0'.$centavos;
     }
-    $cant=floor($cant);  
+    $cant=floor($cant);
+    if(floor($cant/1000000000000)-floor($cant/1000000000000000)*1000000000000>0){
+      if($this->numeros_base(floor($cant/1000000000000))=='uno'){
+        $cant_letra.='Un billón ';
+      }else{
+        $cant_letra.=$this->numeros_base(floor($cant/1000000)).' billones ';
+      }
+    } 
+    if(floor($cant/1000000000)-floor($cant/1000000000000)*1000000000>0){
+      if($this->numeros_base(floor($cant/1000000000))=='uno'){
+        $cant_letra.='Un mil ';
+      }else{
+        $cant_letra.=$this->numeros_base(floor($cant/1000000)).' mil ';
+      }
+    }  
     if(floor($cant/1000000)-floor($cant/1000000000)*1000000>0){
       if($this->numeros_base(floor($cant/1000000))=='uno'){
         $cant_letra.='Un millón ';

@@ -13,8 +13,17 @@ $(document).ready(function(){
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		for (i = 0; i < resp.length; i++){
-			ANIOS_HIST.unshift(resp[i].Anio+" "+resp[i].Nombre)
-			DATA_HIST.unshift(resp[i].Monto)
+			ANIOS_HIST.unshift(resp[i].Anio);
+			DATA_HIST.unshift(resp[i].Monto);
+			if(resp[i].Id==$('#paramVersion').val()){
+				$('#montoTotal').html(number_format(resp[i].Monto));
+			}
+			var YoY='-';
+			if(i < resp.length -1){
+				YoY=(resp[i].Monto-resp[i+1].Monto)/resp[i+1].Monto*100;
+				YoY=YoY.toFixed(1)+'%';
+			}
+			$('#tablaHistorico tbody').append('<tr data-anio="'+resp[i].Anio+'" data-monto="'+resp[i].Monto+'"><td>'+resp[i].Anio+' <span class="small">'+resp[i].Nombre+'</span></td><td class="text-right">$ '+number_format(resp[i].Monto)+'</td><td class="YoY text-right" >'+YoY+'</td></tr>');
 		}
 		var $presupuestoFederalTotal = jQuery('.canvas-chart-line-presupuesto-historico');
 		if ($presupuestoFederalTotal.length) {
@@ -87,9 +96,15 @@ $(document).ready(function(){
 	$.post("/backend",params,function(resp){
 		var donaLabels=new Array();
 		var donaValores=new Array();
+		var total=0;
 		for (i = 0; i < resp.length; i++){
 			donaLabels.push(resp[i].Nombre);
 			donaValores.push(resp[i].Monto);
+			total+=resp[i].Monto;
+		}
+		for (i = 0; i < resp.length; i++){
+			var porcentaje=resp[i].Monto/total*100;
+			$('#tablaOG tbody').append('<tr><td>'+resp[i].Nombre+'</td><td class="text-right">$'+number_format(resp[i].Monto,0)+'</td><td class="text-right">'+porcentaje.toFixed(1)+'%</td></tr>')
 		}
 		var $canvasesCapituloGasto = jQuery('.canvas-chart-donut-capitulos-gasto');
 		if ($canvasesCapituloGasto.length) {

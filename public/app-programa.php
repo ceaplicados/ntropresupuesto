@@ -95,7 +95,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<div class="row">
 			<div class="col-md-6">
 				<ol class="breadcrumb darklinks">
-					<li><a href="/">Dashboard</a></li>
+					<li><a href="/"><img src="/imgs/logo.svg" alt="Dashboard"/></a></li>
 					<li><a href="/<?php echo($Estado->getCodigo()); ?>"><?php echo($Estado->getNombre()); ?></a></li>
 					<li><a href="/<?php echo($Estado->getCodigo()); ?>/ur/<?php echo($UnidadPresupuestal->getClave()); ?>-<?php echo($UnidadResponsable->getClave()); ?>"><?php echo($UnidadResponsable->getNombre()); ?></a></li>
 					<li class="active"><?php echo($UnidadPresupuestal->getClave()."-".$UnidadResponsable->getClave()."-".$Programa->getClave()); ?>. <?php echo($Programa->getNombre()); ?></li>
@@ -140,12 +140,25 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		<!-- .row -->
 		<div class="row">
 			<!-- Presupuesto total -->
+			<div class="col-xs-12 mb-3">
+				<p class="text-center">El presupuesto para el programa <i><?php echo($Programa->getNombre()); ?></i>, de <?php echo($UnidadResponsable->getNombre()); ?>, <?php echo($Estado->getNombre()); ?> para el año <?php echo($versionActual->getAnio()); ?> es de $ <span id="montoTotal"></span>, <span class="small">a valores del <?php echo($INPCActual->getAnio()); ?></span></p>
+			</div>
 			<div class="col-xs-12">
 				<div class="with_border with_padding">
 					<h4>Histórico</h4>
 					<div class="canvas-chart-wrapper">
 						<canvas class="canvas-chart-line-programa-historico"></canvas>
 					</div>
+					<table class="table" id="tablaHistorico">
+						<thead>
+							<tr>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="montos"></tr>
+							<tr class="incremento"></tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<!-- .col-* -->
