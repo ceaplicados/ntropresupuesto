@@ -182,7 +182,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<table id="tablaHistorico" class="table">
+				<table id="tablaHistorico" class="table overflow-x">
 					<thead>
 						<tr class="anio">
 						</tr>

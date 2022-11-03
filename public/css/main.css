@@ -13123,7 +13123,9 @@ footer a.social-icon {
 ol.breadcrumb img {
 	max-height: 2em;
 }
-
+.overflow-x{
+	overflow-x: auto !important;
+}
 div#toast {
 	position: fixed;
 	top: 5em;
