@@ -6,6 +6,40 @@ $(document).ready(function(){
 	updateCuaderno();
 });
 
+var _Estados=new Array();
+_Estados[1]='AGS';
+_Estados[2]='BC';
+_Estados[3]='BCS';
+_Estados[4]='CAMP';
+_Estados[5]='COAH';
+_Estados[6]='COL';
+_Estados[7]='CHIS';
+_Estados[8]='CHIH';
+_Estados[9]='CDMX';
+_Estados[10]='DGO';
+_Estados[11]='GTO';
+_Estados[12]='GRO';
+_Estados[13]='HGO';
+_Estados[14]='JAL';
+_Estados[15]='EDOMEX';
+_Estados[16]='MICH';
+_Estados[17]='MOR';
+_Estados[18]='NAY';
+_Estados[19]='NL';
+_Estados[20]='OAX';
+_Estados[21]='PUE';
+_Estados[22]='QRO';
+_Estados[23]='QROO';
+_Estados[24]='SLP';
+_Estados[25]='SIN';
+_Estados[26]='SON';
+_Estados[27]='TAB';
+_Estados[28]='TAMPS';
+_Estados[29]='TLAX';
+_Estados[30]='VER';
+_Estados[31]='YUC';
+_Estados[32]='NULL';
+
 function updateCuaderno(){
 	var params=new Object();
 	params.action="getFullCuaderno";
@@ -33,14 +67,14 @@ function updateCuaderno(){
 				nombre="";
 				liga='';
 				if(resp.Renglones[i].Tipo=="ProgramaPresupuestal"){
-					liga='<a target="_blank" href="app-pp?p='+resp.Renglones[i].IdReferencia+'&i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
+					liga='<a target="_blank" href="/'+_Estados[resp.Renglones[i].Estado]+'/programa/'+resp.Renglones[i].Clave+'?i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
 				}
 				if(resp.Renglones[i].Tipo=="Total"){
 					if(resp.Renglones[i].TipoFiltro=="UR"){
-						liga='<a target="_blank" href="app-ur?u='+resp.Renglones[i].IdFiltro+'&i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
+						liga='<a target="_blank" href="/'+_Estados[resp.Renglones[i].Estado]+'/ur/'+resp.Renglones[i].Clave+'?i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
 					}
 					if(resp.Renglones[i].TipoFiltro=="Estado"){
-						liga='<a target="_blank" href="app-estado?e='+resp.Renglones[i].Estado+'&i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
+						liga='<a target="_blank" href="/'+_Estados[resp.Renglones[i].Estado]+'?i='+$("#INPC").val()+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a>';
 					}
 				}
 				if(resp.Renglones[i].Tipo=="Total" || resp.Renglones[i].Tipo=="CapituloGasto" || resp.Renglones[i].Tipo=="ConceptoGeneral" || resp.Renglones[i].Tipo=="PartidaGenerica" || resp.Renglones[i].Tipo=="ObjetoGasto" || resp.Renglones[i].Tipo=="ProgramaPresupuestal"){
