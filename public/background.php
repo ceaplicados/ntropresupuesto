@@ -57,7 +57,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 		}
 		if($_POST["action"]=="getTotalesEstado"){
 			$resultado=array();
-			foreach($DaoVersionesPresupuesto->showMontosByEstado($_POST["Estado"],false) as $Version){
+			foreach($DaoVersionesPresupuesto->showMontosByEstado($_POST["Estado"],true) as $Version){
 				$Version->setMonto($Version->getMonto()/$_POST["Deflactor"]);
 				array_push($resultado, $Version);
 			}
@@ -103,7 +103,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 		}
 		if($_POST["action"]=="getHistoricoUR"){
 			$resp=array();
-			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"]);
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
 			$resp["capitulos"]=$DaoCapitulosGasto->showAll();
 			$INPCActual=$DaoINPC->show($_POST["INPC"]);
 			$INPCs=array();
@@ -140,7 +140,7 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 			$Programa=$DaoProgramas->show($_POST["PP"]);
 			$UR=$DaoUnidadResponsable->show($Programa->getUnidadResponsable());
 			$UP=$DaoUnidadPresupuestal->show($UR->getUnidadPresupuestal());
-			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($UP->getEstado());
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($UP->getEstado(),true);
 			$INPCActual=$DaoINPC->show($_POST["INPC"]);
 			$INPCs=array();
 			foreach($resp["versiones"] as $version){

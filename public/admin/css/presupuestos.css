@@ -1,0 +1,159 @@
+h6 {
+	font-size: 1.1em;
+	position: relative;
+}
+
+h6:after {content: " ";position: absolute;bottom: -3px;width: 4em;height: 4px;background: #E15B26;left: 0px;}
+p.label {
+	font-size: .9em;
+	color: #999999;
+}
+.file-field span {
+	color: white;
+}
+
+table#versionesPresupuestos ul {
+	padding: 0px;
+	margin: 0px;
+	list-style: none;
+	display: block;
+}
+
+table#versionesPresupuestos ul li {
+	display: block;
+	text-align: center;
+	position: relative;
+	border: 1px #DDD solid;
+	border-radius: 5px;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	width: 12em;
+}
+
+table#versionesPresupuestos ul li span.fecha {
+	font-size: .7em;
+	display: block;
+	text-align: left;
+	padding-left: 1em;
+	margin-top: 1em;
+}
+
+span.version {
+	display: inline-block;
+	width: 2.5em;
+	height: 2.5em;
+	line-height: 2.5em;
+	background: gray;
+	color: white;
+	border-radius: 2em;
+	margin-bottom: .1em;
+	cursor: pointer;
+}
+
+.actual span.version {
+	background: teal;
+}
+
+li span.version {
+	position: absolute;
+	top: -1em;
+	left: -1em;
+}
+
+span.ObjetoGasto {
+	display: block;
+	text-align: right;
+	padding-right: 1em;
+	font-size: .9em;
+}
+
+span.ProgramaPresupuestal {
+	display: block;
+	text-align: right;
+	padding-right: 1em;
+	font-size: .9em;
+}
+li a.inconsistencias {
+	position: absolute;
+	left: .5em;
+	bottom: 1.7em;
+	background: whitesmoke;
+	display: block;
+	width: 2em;
+	height: 2em;
+	line-height: 2em;
+	border-radius: 1em;
+}
+p.codigo {
+	text-align: left;
+	margin-left: -4.2em;
+	font-size: .8em;
+	margin-bottom: 3em;
+}
+
+p.codigo span {
+	vertical-align: middle;
+	margin-left: 4em;
+	margin-right: 1em;
+}
+.codigo b {
+	margin-left: 3em;
+}
+
+.codigo b.actual {
+	margin-left: 0px;
+}
+#addPresupestosOG{
+	display: none;
+}
+
+.tipoPresupuesto div {
+	display: inline-block;
+	margin-right: 3em;
+}
+#paso3 .sinNuevas{
+	display: none;
+}
+
+#paso2, #paso3{
+	display: none;
+}
+.paso2 #paso1, .paso2 #paso3 {
+	display: none;
+}
+.paso2 #paso2{
+	display: block;
+}
+.paso3 #paso1, .paso3 #paso2 {
+	display: none;
+}
+.paso3 #paso3{
+	display: block;
+}
+
+.versionPresupuestoPP div {
+	display: inline-block;
+	margin-right: 3em;
+}
+#addPresupestosPP{
+	display: none;
+}
+#paso3PP .sinNuevas{
+	display: none;
+}
+
+#paso2PP, #paso3PP{
+	display: none;
+}
+.paso2PP #paso1PP, .paso2PP #paso3PP {
+	display: none;
+}
+.paso2PP #paso2PP{
+	display: block;
+}
+.paso3PP #paso1PP, .paso3PP #paso2PP {
+	display: none;
+}
+.paso3PP #paso3PP{
+	display: block;
+}

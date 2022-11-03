@@ -36,102 +36,214 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 				<p>Colabora para clasificar el presupuesto de acuerdo a los Objetivos de Desarrollo Sostenible.</p>
 			</div>
 			<div id="interfazPropuesta" class="paso0">
-				<div class="col-md-12">
-					<h4>Realiza una propuesta</h4>
-					<button class="button theme_button" id="do_comenzarPropuesta" onclick="setPasoPropuesta(1)">Comenzar</button>
+				<div class="col-xs-12 col-md-6 do_comenzarPropuesta">
+					<h4>Crea una propuesta</h4>
+					<p>Revisa un programa presupuestal y propón una clasificación a los derechos que abona.</p>
+					<button class="button theme_button" id="do_comenzarPropuesta" onclick="setPasoPropuesta(1)">Crear</button>
 				</div>
-				<div id="indicadoresPropuesta">
-					<div class="col-sm-3">
-						<div class="indicadorPropuesta paso1"></div>
-					</div>
-					<div class="col-sm-3">
-						<div class="indicadorPropuesta paso2"></div>
-					</div>
-					<div class="col-sm-3">
-						<div class="indicadorPropuesta paso3"></div>
-					</div>
-					<div class="col-sm-3">
-						<div class="indicadorPropuesta paso4"></div>
-					</div>
+				<div class="col-xs-12 col-md-6 do_comenzarRevision">
+					<h4>Revisa una propuesta</h4>
+					<p>Revisa una propuesta realizada y confirma la clasificación o propón una corrección.</p>
+					<button class="button theme_button" id="do_comenzarRevision" onclick="setPasoRevision(1)">Revisar</button>
 				</div>
-				<div id="paso1">
-					<div class="col-md-12">
-						<h6>1. Selecciona una unidad responsable</h6>
-						<p>Las unidades responsables son las dependencias del gobierno u órganos autónomos que ejercen presupuesto público.</p>
-						<div class="row mb-3">
-							<div class="col-md-6">
-								<input type="text" class="form-control" id="filtrarURs" onkeyup="do_filtrarURs()" placeholder="Filtrar Unidad Responsable" />
+				<div class="col-xs-12">
+					<div class="row">
+						<div id="indicadoresPropuesta">
+							<div class="col-sm-3">
+								<div class="indicadorPropuesta paso1"></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="indicadorPropuesta paso2"></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="indicadorPropuesta paso3"></div>
+							</div>
+							<div class="col-sm-3">
+								<div class="indicadorPropuesta paso4"></div>
 							</div>
 						</div>
-						<ul id="unidadesResponsables">
-							<?php foreach($DaoUnidadResponsable->pendientesPresupuestoDDHHbyEstado(14) as $UnidadResponsable){ ?>
-							<li data-id="<?php echo($UnidadResponsable->getId()); ?>" onclick="selectUR(this)">
-								<?php echo $UnidadResponsable->getNombre(); ?>
-							</li>
-							<?php } ?>
-						</ul>
-					</div>
-				</div>
-				<div id="paso2">
-					<div class="col-md-12">
-						<h6>2. Selecciona un programa presupuestal de <span class="ur"></span></h6>
-						<ul id="programasUR">
-							
-						</ul>
-					</div>
-				</div>
-				<div id="paso3">
-					<div class="col-md-12">
-						<h6>3. Selecciona los ODS y metas a los que abona.</h6>
-						<p>Da click sobre un ODS para proponerlo como un objetivo al que este programa presupuestal abona, además puedes seleccionar las metas específicas a las que el programa aporta.  Puedes ver el detalle del programa y sus indicadores dando clic sobre el ícono del enlace.</p>
-						<p class="programa"></p>
-					</div>
-					<div class="col-md-6 ODSs">
-						<?php for ($i = 1; $i <= 17; $i++){ ?>
-						<img src="/imgs/ODS/S-WEB-Goal-<?php echo($i); ?>.png" class="ODS" data-id="<?php echo($i); ?>" onclick="selectODS(this)"/>
-						<?php } ?>
-					</div>
-					<div class="col-md-6 metasODSs">
-						<p>ODS seleccionados:</p>
-						<div id="ODSseleccionados"></div>
-						<p>Metas seleccionadas:</p>
-						<ul id="metasSeleccionadas" class="list-group">
-							<li class="sinMeta list-group-item"><i>Comienza seleccionando un ODS</i></li>
-						</ul>
-						<div id="metasODS">
-							<p>Selecciona una o más metas del ODS <span class="numero"></span></p>
-							<ul id="selecionarMetas" class="list-group"></ul>
+						<div id="paso1">
+							<div class="col-md-12">
+								<h6>1. Selecciona una unidad responsable</h6>
+								<p>Las unidades responsables son las dependencias del gobierno u órganos autónomos que ejercen presupuesto público.</p>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<input type="text" class="form-control" id="filtrarURs" onkeyup="do_filtrarURs()" placeholder="Filtrar Unidad Responsable" />
+									</div>
+								</div>
+								<ul id="unidadesResponsables">
+									<?php foreach($DaoUnidadResponsable->pendientesPresupuestoDDHHbyEstado(14) as $UnidadResponsable){ ?>
+									<li data-id="<?php echo($UnidadResponsable->getId()); ?>" onclick="selectUR(this)">
+										<?php echo $UnidadResponsable->getNombre(); ?>
+									</li>
+									<?php } ?>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-12 text-center">
-						<button class="button theme_button" onclick="confirmarODS()">Confirmar</button>
-					</div>
-				</div>
-				<div id="paso4">
-					<div class="row">
-						<div class="col-md-12">
-							<h6>4. Confirma la información.</h6>
-							<p class="programa"></p>
-							<p><a href="#" onclick="setPasoPropuesta(3)">Regresar al paso 3</a></p>
+						<div id="paso2">
+							<div class="col-md-12">
+								<h6>2. Selecciona un programa presupuestal de <span class="ur"></span></h6>
+								<ul id="programasUR">
+									
+								</ul>
+							</div>
 						</div>
-						<div class="col-md-6">
-							<p>ODSs seleccionados</p>
-							<p class="instruccionPrincipal">Da click sobre un ODS para señalarlo como al que principalmente abona este programa.</p>
-							<div id="ODSseleccionadosConfirm"></div>
+						<div id="paso3">
+							<div class="col-md-12">
+								<h6>3. Selecciona los ODS y metas a los que abona.</h6>
+								<p>Da click sobre un ODS para proponerlo como un objetivo al que este programa presupuestal abona, además puedes seleccionar las metas específicas a las que el programa aporta.  Puedes ver el detalle del programa y sus indicadores dando clic sobre el ícono del enlace.</p>
+								<p class="programa"></p>
+							</div>
+							<div class="col-md-6 ODSs">
+								<?php for ($i = 1; $i <= 17; $i++){ ?>
+								<img src="/imgs/ODS/S-WEB-Goal-<?php echo($i); ?>.png" class="ODS" data-id="<?php echo($i); ?>" onclick="selectODS(this)"/>
+								<?php } ?>
+							</div>
+							<div class="col-md-6 metasODSs">
+								<p>ODS seleccionados:</p>
+								<div id="ODSseleccionados"></div>
+								<p>Metas seleccionadas:</p>
+								<ul id="metasSeleccionadas" class="list-group">
+									<li class="sinMeta list-group-item"><i>Comienza seleccionando un ODS</i></li>
+								</ul>
+								<div id="metasODS">
+									<p>Selecciona una o más metas del ODS <span class="numero"></span></p>
+									<ul id="selecionarMetas" class="list-group"></ul>
+								</div>
+							</div>
+							<div class="col-md-12 text-center">
+								<button class="button theme_button" onclick="confirmarODS()">Confirmar</button>
+							</div>
 						</div>
-						<div class="col-md-6">
-							<p>Metas seleccionadas</p>
-							<ul id="metasSeleccionadasConfirm" class="list-group row"></ul>
+						<div id="paso4">
+							<div class="row">
+								<div class="col-md-12">
+									<h6>4. Confirma la información.</h6>
+									<p class="programa"></p>
+									<p><a href="#" onclick="setPasoPropuesta(3)">Regresar al paso 3</a></p>
+								</div>
+								<div class="col-md-6">
+									<p>ODSs seleccionados</p>
+									<p class="instruccionPrincipal">Da click sobre un ODS para señalarlo como al que principalmente abona este programa.</p>
+									<div id="ODSseleccionadosConfirm"></div>
+								</div>
+								<div class="col-md-6">
+									<p>Metas seleccionadas</p>
+									<ul id="metasSeleccionadasConfirm" class="list-group row"></ul>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+								<div class="col-md-6 form-group">
+									<label>Explica brevemente por qué tu propuesta de clasificación</label>
+									<textarea id="argumentacion" class="form-control"></textarea>
+								</div>
+								<div class="col-md-12 text-center">
+									<button class="button theme_button" id="guardarPropuesta" onclick="do_guardarPropuesta()">Confirmar</button>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3"></div>
-						<div class="col-md-6 form-group">
-							<label>Explica brevemente por qué tu propuesta de clasificación</label>
-							<textarea id="argumentacion" class="form-control"></textarea>
+						<div id="indicadoresRevision">
+							<div class="col-sm-4">
+								<div class="indicadorRevision paso1_revision"></div>
+							</div>
+							<div class="col-sm-4">
+								<div class="indicadorRevision paso2_revision"></div>
+							</div>
+							<div class="col-sm-4">
+								<div class="indicadorRevision paso3_revision"></div>
+							</div>
 						</div>
-						<div class="col-md-12 text-center">
-							<button class="button theme_button" id="guardarPropuesta" onclick="do_guardarPropuesta()">Confirmar</button>
+						<div id="paso1_revision">
+							<div class="row">
+								<div class="col-md-12">
+									<h6>1. Selecciona una propuesta a revisar.</h6>
+								</div>
+								<div class="col-md-6">
+									<p><b>Filtrar por ODS</b></p>
+									<div id="filtroODS">
+										<?php for ($i = 1; $i <= 17; $i++){ ?>
+										<img src="/imgs/ODS/S-WEB-Goal-<?php echo($i); ?>.png" class="ODSfiltroRevision selected" data-id="<?php echo($i); ?>" onclick="filtrarODSRevision(this)"/>
+										<?php } ?>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<p><b>Filtrar por unidad responsable</b></p>
+									<ul id="filtroUR"></ul>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>Fecha propuesta</th>
+												<th>Programa</th>
+												<th>Unidad Responsable</th>
+												<th>ODSs</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="paso2_revision">
+							<div class="row">
+								<div class="col-md-12">
+									<h6>2. Revisa la propuesta.</h6>
+									<p class="programa"></p>
+									<p><a href="#" onclick="setPasoRevision(1)">Regresar al paso 1</a></p>
+								</div>
+								<div class="col-md-6">
+									<p>ODSs seleccionados</p>
+									<p class="instruccionPrincipal">Da click sobre un ODS para señalarlo como al que principalmente abona este programa.</p>
+									<div id="ODSseleccionadosConfirm"></div>
+								</div>
+								<div class="col-md-6">
+									<p>Metas seleccionadas</p>
+									<ul id="metasSeleccionadasConfirm" class="list-group row"></ul>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+								<div class="col-md-6 form-group">
+									<label>Explica brevemente por qué tu propuesta de clasificación</label>
+									<textarea id="argumentacion" class="form-control"></textarea>
+								</div>
+								<div class="col-md-12 text-center">
+									<button class="button theme_button" id="guardarPropuesta" onclick="setPasoRevision(3)">Confirmar</button>
+								</div>
+							</div>
+						</div>
+						<div id="paso3_revision">
+							<div class="row">
+								<div class="col-md-12">
+									<h6>3. Confirma y envía.</h6>
+									<p class="programa"></p>
+									<p><a href="#" onclick="setPasoRevision(2)">Regresar al paso 2</a></p>
+								</div>
+								<div class="col-md-6">
+									<p>ODSs seleccionados</p>
+									<p class="instruccionPrincipal">Da click sobre un ODS para señalarlo como al que principalmente abona este programa.</p>
+									<div id="ODSseleccionadosConfirm"></div>
+								</div>
+								<div class="col-md-6">
+									<p>Metas seleccionadas</p>
+									<ul id="metasSeleccionadasConfirm" class="list-group row"></ul>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3"></div>
+								<div class="col-md-6 form-group">
+									<label>Explica brevemente por qué tu propuesta de clasificación</label>
+									<textarea id="argumentacion" class="form-control"></textarea>
+								</div>
+								<div class="col-md-12 text-center">
+									<button class="button theme_button" id="guardarPropuesta" onclick="do_guardarPropuesta()">Confirmar</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -179,7 +291,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 				<p>Te presentaremos los programas presupuestales para que puedas sugerir a qué objetivo del desarrollo sostenible abona de manera directa o indirecta, podrás revisar las propuestas realizadas por otras personas y proponer correcciones.</p>
 				<p>Para ayudarnos con la clasificación inicia sesión o crea una cuenta:</p>
 				<p class="text-center">
-					<a href="https://accounts.google.com/o/oauth2/auth?scope=<?php echo(urlencode("profile email")); ?>&redirect_uri=https%3A%2F%2F<?php echo $DaoUsuarios->getParam('dominio'); ?>%2Foauth_Google&response_type=code&client_id=<?php echo $DaoUsuarios->getParam('Google_ClientId'); ?>&access_type=offline&approval_prompt=auto" class="btn"><img id="loginWithGoogle" src="imgs/sing_with_google.svg" title="Inicia sesión con Google" class="right" style="vertical-align: bottom;"></a>
+					<a href="https://accounts.google.com/o/oauth2/auth?scope=<?php echo(urlencode("profile email")); ?>&redirect_uri=https%3A%2F%2F<?php echo $DaoUsuarios->getParam('dominio'); ?>%2Foauth_Google&response_type=code&client_id=<?php echo $DaoUsuarios->getParam('Google_ClientId'); ?>&access_type=offline&approval_prompt=auto&state=ddhh" class="btn"><img id="loginWithGoogle" src="imgs/sing_with_google.svg" title="Inicia sesión con Google" class="right" style="vertical-align: bottom;"></a>
 				</p>
 			</div>
 			<div class="col-md-6">

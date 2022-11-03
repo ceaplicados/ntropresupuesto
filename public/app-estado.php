@@ -29,7 +29,7 @@ if(!$Estado->getId()>0){
 	header("Location: /404");
 	exit();
 }
-$Versiones=$DaoVersionesPresupuesto->getByEstado($Estado->getId());
+$Versiones=$DaoVersionesPresupuesto->getByEstado($Estado->getId(),true);
 $INPCs=$DaoINPC->showAll();
 $reload=false;
 if(!isset($_GET["v"])){
