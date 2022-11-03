@@ -5,7 +5,7 @@ require_once 'modelos/Programas.php';
 class DaoProgramas extends np_base{
 
   public function add(Programas $Programas){
-    $sql="INSERT INTO Programas (Clave,Nombre,UnidadResponsable,ODS,MetaODS,Data) VALUES (:Clave,:Nombre,:UnidadResponsable,:ODS,:MetaODS);";
+    $sql="INSERT INTO Programas (Clave,Nombre,UnidadResponsable,ODS,MetaODS,Data) VALUES (:Clave,:Nombre,:UnidadResponsable,:ODS,:MetaODS,:Data);";
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute(array(':Clave' => $Programas->getClave(), ':Nombre' => $Programas->getNombre(), ':UnidadResponsable' => $Programas->getUnidadResponsable(), ':ODS' => $Programas->getODS(), ':MetaODS' => $Programas->getMetaODS(), ':Data' => $Programas->getData()));

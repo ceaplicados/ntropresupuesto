@@ -277,7 +277,7 @@ class DaoUnidadResponsable extends np_base{
     if($UR!==NULL){
       $whereUR=" AND UnidadResponsable.Id=$UR";
     }
-    $sql="SELECT UnidadResponsable.*, SUM(Monto) AS Monto  FROM programas JOIN UnidadResponsable ON UnidadResponsable.Id=programas.UnidadResponsable JOIN ProgramasMonto ON ProgramasMonto.Programa=programas.Id WHERE Version=$Version $whereUR GROUP BY UnidadResponsable.Id ORDER BY UnidadPresupuestal,Clave";
+    $sql="SELECT UnidadResponsable.*, SUM(Monto) AS Monto  FROM Programas JOIN UnidadResponsable ON UnidadResponsable.Id=Programas.UnidadResponsable JOIN ProgramasMonto ON ProgramasMonto.Programa=Programas.Id WHERE Version=$Version $whereUR GROUP BY UnidadResponsable.Id ORDER BY UnidadPresupuestal,Clave";
     try {
       $sth=$this->_dbh->prepare($sql);
       $sth->execute();
