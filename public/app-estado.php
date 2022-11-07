@@ -134,9 +134,9 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 							<table class="table mt-4" id="tablaOG">
 								<thead>
 									<tr>
-										<th>Capítulo de gasto</th>
-										<th>Presupuesto <?php echo($versionActual->getAnio()); ?></th>
-										<th>Porcentaje</th>
+										<th>Capítulo de gasto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Presupuesto <?php echo($versionActual->getAnio()); ?> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Porcentaje <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 									</tr>
 								</thead>
 								<tbody></tbody>
@@ -160,9 +160,9 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 								<table class="table mt-4" id="tablaHistorico">
 									<thead>
 										<tr>
-											<th>Año</th>
-											<th>Presupuesto</th>
-											<th>Crecimiento</th>
+											<th>Año <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+											<th>Presupuesto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+											<th>Crecimiento <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 										</tr>
 									</thead>
 									<tbody></tbody>

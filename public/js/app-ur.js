@@ -6,7 +6,6 @@ $(document).ready(function(){
 	params.INPC=$("#paramINPC").val();
 	params.Estado=$("#paramEstado").val();
 	$.post("/backend",params,function(resp){
-		console.log(resp);
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		var DATA_CG=new Array();
@@ -35,19 +34,23 @@ $(document).ready(function(){
 		$('#tablaHistorico thead .anio').prepend('<th rowspan="2">Capítulo de gasto</th>');
 		for (let j = 0; j < resp.capitulos.length; j++) {
 			var rowAnio='';
+			var TotalCapitulo=0;
 			for (i = 0; i < resp.versiones.length; i++){
 				if(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id]){
 					var porcentaje='';
 					if(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto>0){
 						porcentaje=resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto/totalesVersiones[resp.versiones[i].Id]*100;
 						porcentaje=porcentaje.toFixed(1)+'%';
+						TotalCapitulo+=resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto;
 					}
 					rowAnio='<td class="text-right">$'+number_format(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto)+'</td><td>'+porcentaje+'</td>'+rowAnio;
 				}else{
 					rowAnio='<td></td><td></td>'+rowAnio;
 				}
 			}
-			$('#tablaHistorico tbody').append('<tr><td>'+resp.capitulos[j].Nombre+'</td>'+rowAnio+'</tr>');
+			if(TotalCapitulo>0){
+				$('#tablaHistorico tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+'</td>'+rowAnio+'</tr>');
+			}
 		}
 		for (let i = 0; i < resp.capitulos.length; i++) {
 			var DATASET=new Object();

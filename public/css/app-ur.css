@@ -28,7 +28,7 @@ table .monto, table .porcentaje{
 	color: teal;
 	margin-left: .5em;
 }
-#tablaProgramas tfoot {
+#tablaHistorico tfoot, #tablaProgramas tfoot {
 	font-weight: bold;
 	border-top: black 2px solid;
 }

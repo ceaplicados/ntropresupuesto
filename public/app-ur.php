@@ -181,8 +181,8 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<!-- .col-* -->
 		</div>
 		<div class="row">
-			<div class="col-xs-12">
-				<table id="tablaHistorico" class="table overflow-x">
+			<div class="col-xs-12 overflow-x">
+				<table id="tablaHistorico" class="table">
 					<thead>
 						<tr class="anio">
 						</tr>
