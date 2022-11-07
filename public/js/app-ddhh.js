@@ -185,6 +185,7 @@ function do_guardarPropuesta(){
 				toast('Propuesta guardada!');
 				$("#guardarPropuesta").html('Confirmar');
 				setPasoPropuesta(0);
+				getPropuestasUsuario();
 			},"json")
 		}
 	}
@@ -194,15 +195,6 @@ function getPropuestasUsuario(){
 	var params=new Object();
 	params.action="getPropuestasUsuario";
 	$.post("/backend",params,function(resp){
-		/*
-		<tr>
-			<th>Fecha</th>
-			<th>Programa</th>
-			<th>ODSs y metas</th>
-			<th>Justificación</th>
-			<th>Estatus</th>
-		</tr>
-		*/
 		if(resp.Propuestas.length>0){
 			$("#misPropuestas tbody tr.sinPropuestas").remove();
 			for (i = 0; i < resp.Propuestas.length; i++) {
@@ -233,4 +225,20 @@ function getPropuestasUsuario(){
 		}
 		
 	},"json");
+}
+
+function setPasoRevision(paso){
+	$("#interfazPropuesta").removeClass("paso0_revision");
+	$("#interfazPropuesta").removeClass("paso1_revision");
+	$("#interfazPropuesta").removeClass("paso2_revision");
+	$("#interfazPropuesta").removeClass("paso3_revision");
+	$("#interfazPropuesta").addClass("paso"+paso+"_revision");
+	if(paso==1){
+		$('#paso1_revision img.ODSfiltroRevision').addClass('selected');
+		var params=new Object();
+		params.action="getPropuestasPorRevisar";
+		$.post("/backend",params,function(resp){
+			
+		},"json")
+	}
 }

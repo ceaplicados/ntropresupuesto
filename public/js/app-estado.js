@@ -6,9 +6,9 @@ $(document).ready(function(){
 	
 	
 	var params=new Object()
-	params.action="getTotalesEstado"
-	params.Estado=$("#paramEstado").val()
-	params.Deflactor=$("#deflactor").val()
+	params.action="getTotalesEstado";
+	params.Estado=$("#paramEstado").val();
+	params.INPC=$("#paramINPC").val();
 	$.post("/backend",params,function(resp){
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();

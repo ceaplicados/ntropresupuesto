@@ -57,8 +57,12 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 		}
 		if($_POST["action"]=="getTotalesEstado"){
 			$resultado=array();
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
 			foreach($DaoVersionesPresupuesto->showMontosByEstado($_POST["Estado"],true) as $Version){
-				$Version->setMonto($Version->getMonto()/$_POST["Deflactor"]);
+				$INPCversion=$DaoINPC->show($Version->getAnio());
+				$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+				$Version->setMonto($Version->getMonto()/$deflactor);
 				array_push($resultado, $Version);
 			}
 			echo(json_encode($resultado));
@@ -111,6 +115,23 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 				$resp["resumen"][$version->getId()]=array();
 				$INPCversion=$DaoINPC->show($version->getAnio());
 				foreach($DaoCapitulosGasto->getPresupuestoByURVersion($_POST["UR"],$version->getId()) as $CapGasto){
+					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+					$CapGasto->setMonto(round($CapGasto->getMonto()/$deflactor,2));
+					$resp["resumen"][$version->getId()][$CapGasto->getId()]=$CapGasto;
+				}
+			}
+			echo(json_encode($resp));
+		}
+		if($_POST["action"]=="getHistoricoCG"){
+			$resp=array();
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
+			$resp["capitulos"]=$DaoCapitulosGasto->showAll();
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
+			foreach($resp["versiones"] as $version){
+				$resp["resumen"][$version->getId()]=array();
+				$INPCversion=$DaoINPC->show($version->getAnio());
+				foreach($DaoCapitulosGasto->getPresupuestoByVersion($version->getId()) as $CapGasto){
 					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
 					$CapGasto->setMonto(round($CapGasto->getMonto()/$deflactor,2));
 					$resp["resumen"][$version->getId()][$CapGasto->getId()]=$CapGasto;

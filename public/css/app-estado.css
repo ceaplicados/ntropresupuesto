@@ -19,6 +19,9 @@
 table#tablaHistorico, table#tablaOG {
 	margin-top: 2em;
 }
+h4 a i{
+	color: #ef004f;
+}
 #chart{
 	height: calc(100vh - 4em);
 }

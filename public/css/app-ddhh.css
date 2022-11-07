@@ -11,7 +11,7 @@ img.metaODS {
 #indicadoresPropuesta{
 	display: none;
 }
-#interfazPropuesta.paso1 #do_comenzarPropuesta, #interfazPropuesta.paso2 #do_comenzarPropuesta, #interfazPropuesta.paso3 #do_comenzarPropuesta, #interfazPropuesta.paso4 #do_comenzarPropuesta{
+#interfazPropuesta.paso1 #do_comenzarPropuesta, #interfazPropuesta.paso2 #do_comenzarPropuesta, #interfazPropuesta.paso3 #do_comenzarPropuesta, #interfazPropuesta.paso4 #do_comenzarPropuesta, #interfazPropuesta.paso1 .do_comenzarRevision, #interfazPropuesta.paso2 .do_comenzarRevision, #interfazPropuesta.paso3 .do_comenzarRevision, #interfazPropuesta.paso4 .do_comenzarRevision{
 	display: none;
 }
 #interfazPropuesta.paso1 #indicadoresPropuesta, #interfazPropuesta.paso2 #indicadoresPropuesta, #interfazPropuesta.paso3 #indicadoresPropuesta, #interfazPropuesta.paso4 #indicadoresPropuesta{
@@ -167,4 +167,48 @@ table#misPropuestas td.ODS span {
 	display: block;
 	margin-bottom: .5em;
 	font-size: .9em;
+}
+
+.indicadorRevision {
+	background: #efefef;
+	margin: 2px;
+	height: .5em;
+}
+
+#indicadoresRevision{
+	display: none;
+}
+#interfazPropuesta.paso1_revision #do_comenzarRevision, #interfazPropuesta.paso2_revision #do_comenzarRevision, #interfazPropuesta.paso3_revision #do_comenzarRevision, #interfazPropuesta.paso1_revision .do_comenzarPropuesta, #interfazPropuesta.paso2_revision .do_comenzarPropuesta, #interfazPropuesta.paso3_revision .do_comenzarPropuesta{
+	display: none;
+}
+#interfazPropuesta.paso1_revision #indicadoresRevision, #interfazPropuesta.paso2_revision #indicadoresRevision, #interfazPropuesta.paso3_revision #indicadoresRevision{
+	display: block;
+}
+
+#paso1_revision, #paso2_revision, #paso3_revision, #paso4_revision{
+	transition: .15s ease-in-out;
+	max-height: 0px;
+	overflow: hidden;
+}
+#interfazPropuesta.paso1_revision .indicadorRevision.paso1_revision{
+	background: #696969;
+}
+#interfazPropuesta.paso1_revision #paso1_revision{
+	max-height: 200em;
+	overflow: unset;
+}
+#paso1_revision img.ODSfiltroRevision {
+	max-width: 4em;
+	margin: 2px;
+	cursor: pointer;
+	opacity: .8;
+	filter: grayscale(1);
+	transition: .15s ease-in-out;
+}
+#paso1_revision img.ODSfiltroRevision:hover {
+	transform: scale(1.1);
+}
+#paso1_revision img.ODSfiltroRevision.selected{
+	opacity: 1;
+	filter: none;
 }

@@ -123,7 +123,7 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 			<!-- Histórico del gasto federalizado -->
 			<div class="col-xs-12">
 				<div class="with_border with_padding">
-					<h4>¿En qué se gasta?</h4>
+					<h4>¿En qué se gasta? <a href="/<?php echo($Estado->getCodigo()); ?>/CapituloGasto?i=<?php echo($i); ?>&v=<?php echo($v); ?>"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></h4>
 					<div class="row">
 						<div class="col-xs-12 col-md-6">
 							<div class="canvas-chart-wrapper">

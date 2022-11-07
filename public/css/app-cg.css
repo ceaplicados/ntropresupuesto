@@ -1,0 +1,63 @@
+div#contenedorGraficas canvas{
+	height: calc(100vh - 10em);
+}
+table .monto, table .porcentaje{
+	text-align: right;
+}
+#tablaHistorico tfoot, #tablaProgramas tfoot, #tablaVariaciones tfoot {
+	font-weight: bold;
+	border-top: black 2px solid;
+}
+div#contenedorGraficas {
+	position: relative;
+	height: calc(100vh + 60px);
+	margin-bottom: 3em;
+}
+#tablaHistorico tfoot{
+	font-weight: bold;
+	border-top: black 2px solid;
+}
+div#contenedorGraficas .with_border {
+	position: absolute;
+	top: 0px;
+	width: calc(100% - 1em);
+	height: calc(100% - 2em);
+	display: none;
+}
+div#contenedorGraficas[data-graph='all'] .with_border {
+	display: block;
+}
+div#contenedorGraficas[data-graph='barrasCG'] #barrasCG{
+	display: block;
+}
+div#contenedorGraficas[data-graph='areasCG'] #areasCG{
+	display: block;
+}
+div#contenedorGraficas[data-graph='variacionCG'] #variacionCG{
+	display: block;
+}
+
+div#contenedorGraficas .tiposGrafica {
+	position: absolute;
+	top: -3em;
+	left: 0px;
+}
+.tiposGrafica button.button {
+	padding: .5em;
+}
+
+.tiposGrafica button.button.active {
+	background: #ef004f;
+}
+div#contenedorTablas table{
+	display: none;
+}
+div#contenedorTablas[data-tabla='tablaDistribucionHistorica'] #tablaDistribucionHistorica{
+	display: block;
+}
+div#contenedorTablas[data-tabla='tablaVariaciones'] #tablaVariaciones{
+	display: block;
+}
+div#contenedorTablas[data-tabla='tablaHistorico'] #tablaHistorico{
+	display: block;
+}

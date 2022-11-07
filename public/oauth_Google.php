@@ -139,6 +139,15 @@ if(strlen($_GET['code'])>0){
 	
 	// poner cookie de sesión
 	setcookie("SessionUID", $Session->getUID(), time() + (86400 * 2), "/");
+	if(isset($_GET['state'])){
+		if(strlen($_GET['state'])>0){
+			header("Location: /".urldecode($_GET['state']));
+			exit();	
+		}else{
+			header("Location: /");
+			exit();	
+		}
+	}
 	header("Location: /");
 	exit();	
 }
