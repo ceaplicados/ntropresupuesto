@@ -5,7 +5,6 @@ $(document).ready(function(){
 	params.INPC=$("#paramINPC").val();
 	params.Estado=$("#paramEstado").val();
 	$.post("/backend",params,function(resp){
-		console.log(resp);
 		var ANIOS_HIST=new Array();
 		var DATA_HIST=new Array();
 		var DATA_DIST_HIST=new Array();
@@ -77,9 +76,9 @@ $(document).ready(function(){
 				}
 			}
 			if(TotalCapitulo>0){
-				$('#tablaHistorico tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+'</td>'+rowAnio+'</tr>');
-				$('#tablaDistribucionHistorica tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+'</td>'+rowAnioAreas+'</tr>');
-				$('#tablaVariaciones tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+'</td>'+rowVariaciones+'</tr>');
+				$('#tablaHistorico tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+' <a href="CapituloGasto/'+resp.capitulos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowAnio+'</tr>');
+				$('#tablaDistribucionHistorica tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+' <a href="CapituloGasto/'+resp.capitulos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowAnioAreas+'</tr>');
+				$('#tablaVariaciones tbody').append('<tr><td>'+resp.capitulos[j].Clave+' - '+resp.capitulos[j].Nombre+' <a href="CapituloGasto/'+resp.capitulos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowVariaciones+'</tr>');
 			}
 		}
 

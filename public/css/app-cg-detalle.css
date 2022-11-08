@@ -1,0 +1,57 @@
+div.contenedorGraficas canvas{
+	height: calc(100vh - 10em);
+}
+table .monto, table .porcentaje{
+	text-align: right;
+}
+#tablaConceptoGeneral tfoot, #tablaConceptoGeneralVariaciones tfoot, #tablaUnidadResponsable tfoot, #tablaUnidadResponsableVariaciones tfoot{
+	font-weight: bold;
+	border-top: black 2px solid;
+}
+div.contenedorGraficas {
+	position: relative;
+	height: calc(100vh + 60px);
+	margin-bottom: 3em;
+}
+div.contenedorGraficas .with_border {
+	position: absolute;
+	top: 0px;
+	width: calc(100% - 1em);
+	height: calc(100% - 2em);
+}
+div.contenedorGraficas[data-graph='all'] .with_border {
+	display: block;
+}
+.tiposTabla button.button {
+	padding: .5em;
+}
+
+.tiposTabla button.button.active {
+	background: #ef004f;
+}
+div#contenedorTablas{
+	margin-bottom: 4em;
+}
+div#contenedorTablas div{
+	display: none;
+}
+div#contenedorTablas[data-tabla='tablaConceptoGeneral'] #tablaConceptoGeneral{
+	display: block;
+}
+div#contenedorTablas[data-tabla='tablaConceptoGeneralVariaciones'] #tablaConceptoGeneralVariaciones{
+	display: block;
+}
+
+div#contenedorTablasUR div{
+	display: none;
+}
+div#contenedorTablasUR[data-tabla='tablaUnidadResponsable'] #tablaUnidadResponsable{
+	display: block;
+}
+div#contenedorTablasUR[data-tabla='tablaUnidadResponsableVariaciones'] #tablaUnidadResponsableVariaciones{
+	display: block;
+}
+
+td i.fa.fa-chevron-circle-right {
+	display: none;
+}

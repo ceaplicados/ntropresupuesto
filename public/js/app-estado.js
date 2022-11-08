@@ -104,7 +104,7 @@ $(document).ready(function(){
 		}
 		for (i = 0; i < resp.length; i++){
 			var porcentaje=resp[i].Monto/total*100;
-			$('#tablaOG tbody').append('<tr><td>'+resp[i].Clave+' - '+resp[i].Nombre+'</td><td class="text-right">$'+number_format(resp[i].Monto,0)+'</td><td class="text-right">'+porcentaje.toFixed(1)+'%</td></tr>')
+			$('#tablaOG tbody').append('<tr><td>'+resp[i].Clave+' - '+resp[i].Nombre+'  <a href="'+$('#paramCodigoEstado').val()+'/CapituloGasto/'+resp[i].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td><td class="text-right">$'+number_format(resp[i].Monto,0)+'</td><td class="text-right">'+porcentaje.toFixed(1)+'%</td></tr>')
 		}
 		var $canvasesCapituloGasto = jQuery('.canvas-chart-donut-capitulos-gasto');
 		if ($canvasesCapituloGasto.length) {

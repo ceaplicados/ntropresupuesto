@@ -108,6 +108,24 @@ class DaoCapitulosGasto extends np_base{
     }
     return $CapitulosGasto;
   }
+  
+  public function getByClave($Clave){
+    $sql="SELECT * FROM CapitulosGasto WHERE Clave=:Clave;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':Clave' => $Clave));
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $CapitulosGasto=new CapitulosGasto();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $CapitulosGasto=$this->createObject($result[0]);
+    }
+    return $CapitulosGasto;
+  }
+  
   public function getPresupuestoByVersion($Version){
     $sql="SELECT CapitulosGasto.*, SUM(ObjetoDeGasto.Monto) AS Monto FROM CapitulosGasto JOIN ConceptosGenerales ON ConceptosGenerales.CapituloGasto=CapitulosGasto.Id JOIN PartidasGenericas ON PartidasGenericas.ConceptoGeneral=ConceptosGenerales.Id JOIN ObjetoDeGasto ON ObjetoDeGasto.PartidaGenerica=PartidasGenericas.Id WHERE ObjetoDeGasto.VersionPresupuesto=$Version GROUP BY CapitulosGasto.Id";
     try {

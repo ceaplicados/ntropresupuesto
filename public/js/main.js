@@ -1468,3 +1468,13 @@ _colores_a[2]="rgba(149, 171, 130, 0.5)";
 _colores_a[3]="rgba(189, 144, 91, 0.5)";
 _colores_a[4]="rgba(217, 91, 91, 0.5)";
 _colores_a[5]="rgba(129, 98, 180, 0.5)";
+
+function _coloresTableau20(i){
+	var coloresTableau=["#4E79A7","#A0CBE8","#F28E2B","#FFBE7D","#59A14F","#8CD17D","#B6992D","#F1CE63","#499894","#86BCB6","#E15759","#FF9D9A","#79706E","#BAB0AC","#D37295","#FABFD2","#B07AA1","#D4A6C8","#9D7660","#D7B5A6"];
+	if(i>19){
+		i=i-Math.floor(i/20)*20;
+	}
+	return coloresTableau[i];
+}
+	
+	
