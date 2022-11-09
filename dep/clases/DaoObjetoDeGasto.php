@@ -125,6 +125,23 @@ class DaoObjetoDeGasto extends np_base{
     }
     return $resp;
   }
+  
+  public function getPresupuestoByPartidaGenericaVersion($PartidaGenerica,$Version){
+    $sql="SELECT * FROM ObjetoDeGasto WHERE ObjetoDeGasto.VersionPresupuesto=:Version AND PartidaGenerica=:PartidaGenerica ORDER BY Clave";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':PartidaGenerica' => $PartidaGenerica, ':Version' => $Version));
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
   public function getPresupuestoByClaveOGVersion($ClaveOG,$Version){
     $sql="SELECT ObjetoDeGasto.Clave, MAX(ObjetoDeGasto.Nombre) AS Nombre, SUM(Monto) AS Monto FROM ObjetoDeGasto WHERE VersionPresupuesto=$Version AND ObjetoDeGasto.Clave=$ClaveOG GROUP BY Clave";
     try {

@@ -262,6 +262,44 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 			echo(json_encode($resp));
 		}
 		
+		if($_POST["action"]=="getHistoricoObjetoGasto"){
+			$resp=array();
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
+			foreach($resp["versiones"] as $version){
+				$resp["resumen"][$version->getId()]=array();
+				$INPCversion=$DaoINPC->show($version->getAnio());
+				foreach($DaoObjetoDeGasto->getPresupuestoByPartidaGenericaVersion($_POST['PartidaGenerica'],$version->getId()) as $ObjetoGasto){
+					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+					$ObjetoGasto->setMonto(round($ObjetoGasto->getMonto()/$deflactor,2));
+					array_push($resp["resumen"][$version->getId()], $ObjetoGasto);
+				}
+			}
+			echo(json_encode($resp));
+		}
+		
+		if($_POST["action"]=="getHistoricoPartidaGenericaByUR"){
+			$resp=array();
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
+			$resp["URs"]=array();
+			foreach($resp["versiones"] as $version){
+				$resp["resumen"][$version->getId()]=array();
+				$INPCversion=$DaoINPC->show($version->getAnio());
+				foreach($DaoUnidadResponsable->getPresupuestoByVersionPartidaGenerica($version->getId(),$_POST['PartidaGenerica']) as $UnidadResponsable){
+					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+					$UnidadResponsable->setMonto(round($UnidadResponsable->getMonto()/$deflactor,2));
+					$resp["resumen"][$version->getId()][$UnidadResponsable->getId()]=$UnidadResponsable;
+					if(!isset($resp["URs"][$UnidadResponsable->getId()])){
+						$resp["URs"][$UnidadResponsable->getId()]=$UnidadResponsable;
+					}
+				}
+			}
+			echo(json_encode($resp));
+		}
+		
 		if($_POST["action"]=="getObservables"){
 			$resp=array();
 			$resp["observables"]=$DaoObservable->getByEstado($_POST["Estado"]);

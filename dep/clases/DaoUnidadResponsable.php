@@ -313,6 +313,26 @@ class DaoUnidadResponsable extends np_base{
     return $resp;
   }
   
+  public function getPresupuestoByVersionPartidaGenerica($Version,$PartidaGenerica,$UR=NULL){
+    $whereUR="";
+    if($UR!==NULL){
+      $whereUR=" AND UnidadResponsable.Id=$UR";
+    }
+    $sql="SELECT UnidadResponsable.Id, CONCAT(UnidadPresupuestal.Clave,'-',UnidadResponsable.Clave) AS Clave, UnidadResponsable.Nombre, UnidadPresupuestal, OtrosNombres, SUM(Monto) AS Monto FROM ObjetoDeGasto JOIN UnidadResponsable ON UnidadResponsable.Id=ObjetoDeGasto.UnidadResponsable JOIN UnidadPresupuestal ON UnidadPresupuestal.Id=UnidadResponsable.UnidadPresupuestal WHERE VersionPresupuesto=$Version AND PartidaGenerica=$PartidaGenerica $whereUR GROUP BY UnidadResponsable.Id ORDER BY Clave";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute();
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
   public function getPresupuestoByVersionFromPP($Version,$UR=NULL){
     $whereUR="";
     if($UR!==NULL){
