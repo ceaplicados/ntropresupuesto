@@ -220,6 +220,48 @@ if(strpos($_SERVER["HTTP_REFERER"], "ntropresupuesto:8888")!==false || strpos($_
 			echo(json_encode($resp));
 		}
 		
+		if($_POST["action"]=="getHistoricoPartidasGenericas"){
+			$resp=array();
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
+			$resp["conceptos"]=array();
+			foreach($resp["versiones"] as $version){
+				$resp["resumen"][$version->getId()]=array();
+				$INPCversion=$DaoINPC->show($version->getAnio());
+				foreach($DaoPartidasGenericas->getPresupuestoByConceptoGeneralVersion($_POST['ConceptoGeneral'],$version->getId()) as $PartidaGenerica){
+					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+					$PartidaGenerica->setMonto(round($PartidaGenerica->getMonto()/$deflactor,2));
+					$resp["resumen"][$version->getId()][$PartidaGenerica->getId()]=$PartidaGenerica;
+					if(!isset($resp["conceptos"][$PartidaGenerica->getId()])){
+						$resp["conceptos"][$PartidaGenerica->getId()]=$PartidaGenerica;
+					}
+				}
+			}
+			echo(json_encode($resp));
+		}
+		
+		if($_POST["action"]=="getHistoricoConceptosGeneralesByUR"){
+			$resp=array();
+			$resp["versiones"]=$DaoVersionesPresupuesto->getByEstado($_POST["Estado"],true);
+			$INPCActual=$DaoINPC->show($_POST["INPC"]);
+			$INPCs=array();
+			$resp["URs"]=array();
+			foreach($resp["versiones"] as $version){
+				$resp["resumen"][$version->getId()]=array();
+				$INPCversion=$DaoINPC->show($version->getAnio());
+				foreach($DaoUnidadResponsable->getPresupuestoByVersionConceptoGeneral($version->getId(),$_POST['ConceptoGeneral']) as $UnidadResponsable){
+					$deflactor=$INPCActual->getValor()/$INPCversion->getValor();
+					$UnidadResponsable->setMonto(round($UnidadResponsable->getMonto()/$deflactor,2));
+					$resp["resumen"][$version->getId()][$UnidadResponsable->getId()]=$UnidadResponsable;
+					if(!isset($resp["URs"][$UnidadResponsable->getId()])){
+						$resp["URs"][$UnidadResponsable->getId()]=$UnidadResponsable;
+					}
+				}
+			}
+			echo(json_encode($resp));
+		}
+		
 		if($_POST["action"]=="getObservables"){
 			$resp=array();
 			$resp["observables"]=$DaoObservable->getByEstado($_POST["Estado"]);

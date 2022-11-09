@@ -24,6 +24,7 @@ RewriteRule ^([A-Z]+)\/?$ app-estado.php [QSA,L]
 RewriteRule ^([A-Z]+)/ur/?([a-zA-Z0-9-]+)\/?$ app-ur.php [QSA,L]
 RewriteRule ^([A-Z]+)/CapituloGasto\/?$ app-cg.php [QSA,L]
 RewriteRule ^([A-Z]+)/CapituloGasto/[1-9]000\/?$ app-cg-detalle.php [QSA,L]
+RewriteRule ^([A-Z]+)/ConceptosGenerales/[1-9][0-9]00\/?$ app-cgral.php [QSA,L]
 RewriteRule ^([A-Z]+)/programa/?([a-zA-Z0-9-]+)\/?$ app-programa.php [QSA,L]
 
 SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0

@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	$("header").toggleClass('active-slide-side-header');
 	var params=new Object()
-	params.action="getHistoricoConceptosGenerales";
+	params.action="getHistoricoPartidasGenericas";
 	params.INPC=$("#paramINPC").val();
 	params.Estado=$("#paramEstado").val();
-	params.CapituloGasto=$("#paramCapituloGasto").val();
+	params.ConceptoGeneral=$("#paramConceptoGeneral").val();
 	$.post("/backend",params,function(resp){
 		var ANIOS_HIST=new Array();
 		var DATA_CG=new Array();
@@ -30,8 +30,13 @@ $(document).ready(function(){
 		}
 		for (i = 0; i < resp.versiones.length; i++){
 			if(i < resp.versiones.length -1){
-				var variacion=(totalesVersiones[resp.versiones[i].Id]-totalesVersiones[resp.versiones[i+1].Id])/totalesVersiones[resp.versiones[i+1].Id]*100;
-				$('#tablaConceptoGeneralVariaciones tfoot tr').prepend('<td class="text-right">'+variacion.toFixed(1)+'%</td>');
+				if(totalesVersiones[resp.versiones[i+1].Id]){
+					var variacion=(totalesVersiones[resp.versiones[i].Id]-totalesVersiones[resp.versiones[i+1].Id])/totalesVersiones[resp.versiones[i+1].Id]*100;
+					$('#tablaConceptoGeneralVariaciones tfoot tr').prepend('<td class="text-right">'+variacion.toFixed(1)+'%</td>');
+				}else{
+					$('#tablaConceptoGeneralVariaciones tfoot tr').prepend('<td class="text-right"></td>');
+				}
+				
 			}else{
 				$('#tablaConceptoGeneralVariaciones tfoot tr').prepend('<td class="text-right"></td>');
 			}
@@ -57,8 +62,12 @@ $(document).ready(function(){
 					rowAnio='<td class="text-right">$'+number_format(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto)+'</td>'+rowAnio;
 					rowAnioAreas='<td class="text-right">'+porcentaje+'%</td>'+rowAnioAreas;
 					if(i < resp.versiones.length - 1 ){
-						var variacion=(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto*100;
-						rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						if(resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id]){
+							var variacion=(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto*100;
+							rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						}else{
+							rowVariaciones='<td></td>'+rowVariaciones;
+						}
 					}else{
 						rowVariaciones='<td></td>'+rowVariaciones;
 					}
@@ -69,8 +78,8 @@ $(document).ready(function(){
 				}
 			}
 			if(TotalConcepto>0){
-				$('#tablaConceptoGeneral tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/ConceptosGenerales/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowAnio+'</tr>');
-				$('#tablaConceptoGeneralVariaciones tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/ConceptosGenerales/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowVariaciones+'</tr>');
+				$('#tablaConceptoGeneral tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/PartidasGenericas/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowAnio+'</tr>');
+				$('#tablaConceptoGeneralVariaciones tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/PartidasGenericas/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowVariaciones+'</tr>');
 			}
 		}
 
@@ -124,11 +133,13 @@ $(document).ready(function(){
 	
 	
 	var params=new Object()
-	params.action="getHistoricoCapituloGastoByUR";
+	params.action="getHistoricoConceptosGeneralesByUR";
 	params.INPC=$("#paramINPC").val();
 	params.Estado=$("#paramEstado").val();
-	params.CapituloGasto=$("#paramCapituloGasto").val();
+	params.ConceptoGeneral=$("#paramConceptoGeneral").val();
 	$.post("/backend",params,function(resp){
+		console.log(resp);
+		
 		var ANIOS_HIST=new Array();
 		var DATA_CG=new Array();
 		var totalesVersiones=new Array();
@@ -267,5 +278,5 @@ function showTableUR(Obj){
 }
 
 function changePresupuesto(){
-	window.location.href='/'+$('#paramCodigoEstado').val()+"/CapituloGasto/"+$('#paramCodigoCapituloGasto').val()+"?v="+$("#visualizarAnio").val()+"&i="+$("#valoresAnio").val();
+	window.location.href='/'+$('#paramCodigoEstado').val()+"/ConceptosGenerales/"+$('#paramCodigoConceptoGeneral').val()+"?v="+$("#visualizarAnio").val()+"&i="+$("#valoresAnio").val();
 }

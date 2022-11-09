@@ -126,6 +126,23 @@ class DaoPartidasGenericas extends np_base{
     }
     return $PartidasGenericas;
   }
+  
+  public function getPresupuestoByConceptoGeneralVersion($ConceptoGeneral,$Version){
+    $sql="SELECT PartidasGenericas.*, SUM(ObjetoDeGasto.Monto) AS Monto FROM  PartidasGenericas JOIN ObjetoDeGasto ON ObjetoDeGasto.PartidaGenerica=PartidasGenericas.Id  WHERE ObjetoDeGasto.VersionPresupuesto=:Version AND PartidasGenericas.ConceptoGeneral=:ConceptoGeneral GROUP BY PartidasGenericas.Id";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':ConceptoGeneral' => $ConceptoGeneral, ':Version' => $Version));
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $resp=array();
+    foreach($sth->fetchAll() as $row){
+      array_push($resp,$this->createObject($row));
+    }
+    return $resp;
+  }
+  
   public function getPresupuestoByPGVersion($PG,$Version){
     $sql="SELECT PartidasGenericas.*, SUM(ObjetoDeGasto.Monto) AS Monto FROM PartidasGenericas JOIN ObjetoDeGasto ON ObjetoDeGasto.PartidaGenerica=PartidasGenericas.Id WHERE ObjetoDeGasto.VersionPresupuesto=$Version AND PartidasGenericas.Id=$PG GROUP BY PartidasGenericas.Id";
     try {

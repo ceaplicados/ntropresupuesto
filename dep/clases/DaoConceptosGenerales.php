@@ -110,6 +110,24 @@ class DaoConceptosGenerales extends np_base{
     return $ConceptosGenerales;
   }
   
+  
+  public function getByClave($Clave){
+    $sql="SELECT * FROM ConceptosGenerales WHERE Clave=:Clave;";
+    try {
+      $sth=$this->_dbh->prepare($sql);
+      $sth->execute(array(':Clave' => $Clave));
+    } catch (Exception $e) {
+      var_dump($e);
+      echo($sql);
+    }
+    $ConceptosGenerales=new ConceptosGenerales();
+    $result=$sth->fetchAll();
+    if(count($result)>0){
+      $ConceptosGenerales=$this->createObject($result[0]);
+    }
+    return $ConceptosGenerales;
+  }
+  
   public function getPresupuestoByCapituloGastoVersion($CapituloGasto,$Version){
     $sql="SELECT ConceptosGenerales.*, SUM(ObjetoDeGasto.Monto) AS Monto FROM ConceptosGenerales JOIN PartidasGenericas ON PartidasGenericas.ConceptoGeneral=ConceptosGenerales.Id JOIN ObjetoDeGasto ON ObjetoDeGasto.PartidaGenerica=PartidasGenericas.Id  WHERE ObjetoDeGasto.VersionPresupuesto=:Version AND ConceptosGenerales.CapituloGasto=:CapituloGasto GROUP BY ConceptosGenerales.Id";
     try {
