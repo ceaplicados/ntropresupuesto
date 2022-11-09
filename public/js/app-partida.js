@@ -49,7 +49,7 @@ $(document).ready(function(){
 				for (j = 0; j < resp.resumen[resp.versiones[i].Id].length; j++){
 					if(resp.resumen[resp.versiones[i].Id][j].Clave==$(this).attr('data-clave') && resp.resumen[resp.versiones[i].Id][j].Nombre==$(this).attr('data-nombre')){
 						td='<td data-version="'+resp.versiones[i].Id+'" data-monto="'+resp.resumen[resp.versiones[i].Id][j].Monto+'">$ '+number_format(resp.resumen[resp.versiones[i].Id][j].Monto)+'</td>';
-						monto=resp.resumen[resp.versiones[i].Id][j].Monto;
+						monto+=resp.resumen[resp.versiones[i].Id][j].Monto;
 					}
 				}
 				DATASET.data.unshift(monto);
