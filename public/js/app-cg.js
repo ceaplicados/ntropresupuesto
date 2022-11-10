@@ -64,8 +64,12 @@ $(document).ready(function(){
 					rowAnio='<td class="text-right">$'+number_format(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto)+'</td>'+rowAnio;
 					rowAnioAreas='<td class="text-right">'+porcentaje+'%</td>'+rowAnioAreas;
 					if(i < resp.versiones.length - 1 ){
-						var variacion=(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.capitulos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.capitulos[j].Id].Monto*100;
-						rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						if(resp.resumen[resp.versiones[i+1].Id][resp.capitulos[j].Id]){
+							var variacion=(resp.resumen[resp.versiones[i].Id][resp.capitulos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.capitulos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.capitulos[j].Id].Monto*100;
+							rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						}else{
+							rowVariaciones='<td></td>'+rowVariaciones;
+						}
 					}else{
 						rowVariaciones='<td></td>'+rowVariaciones;
 					}
@@ -128,8 +132,12 @@ $(document).ready(function(){
 				if(j < resp.versiones.length-1){
 					if(resp.resumen[resp.versiones[j].Id]){
 						if(resp.resumen[resp.versiones[j].Id][resp.capitulos[i].Id]){
-							var porcentaje=(resp.resumen[resp.versiones[j].Id][resp.capitulos[i].Id].Monto-resp.resumen[resp.versiones[j+1].Id][resp.capitulos[i].Id].Monto)/resp.resumen[resp.versiones[j+1].Id][resp.capitulos[i].Id].Monto*100;
-							DATASET.data.unshift(porcentaje.toFixed(1));
+							if(resp.resumen[resp.versiones[j+1].Id][resp.capitulos[i].Id]){
+								var porcentaje=(resp.resumen[resp.versiones[j].Id][resp.capitulos[i].Id].Monto-resp.resumen[resp.versiones[j+1].Id][resp.capitulos[i].Id].Monto)/resp.resumen[resp.versiones[j+1].Id][resp.capitulos[i].Id].Monto*100;
+								DATASET.data.unshift(porcentaje.toFixed(1));
+							}else{
+								DATASET.data.unshift(0);
+							}
 						}else{
 							DATASET.data.unshift(0);
 						}

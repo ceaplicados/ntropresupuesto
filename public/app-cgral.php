@@ -23,7 +23,7 @@ if(substr($navURI[count($navURI)-1], 0,1)=="?"){
 if(strpos($navURI[count($navURI)-1], "?")!==false){
 	$navURI[count($navURI)-1]=substr($navURI[count($navURI)-1], 0, strpos($navURI[count($navURI)-1], "?"));
 }
-if(strlen($navURI[0])>3){
+if(strlen($navURI[0])>6){
 	header("Location: /404");
 	exit();	
 }
