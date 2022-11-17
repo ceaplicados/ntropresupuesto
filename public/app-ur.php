@@ -205,10 +205,10 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 						<thead>
 							<tr>
 								<th class="hidden">Texto</th>
-								<th>Clave</th>
-								<th>Programa</th>
-								<th>Presupuesto  <?php echo($versionActual->getAnio()); ?></th>
-								<th>% total</th>
+								<th>Clave <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+								<th>Programa <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+								<th>Presupuesto  <?php echo($versionActual->getAnio()); ?> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+								<th>% total <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -261,10 +261,10 @@ headerPageAdmin($title,$descripcion,$thumb,$tags);
 							<table id="UnidadesResponsablesHermanas" class="table table-striped">
 								<thead>
 									<tr>
-										<th>Clave</th>
-										<th>Nombre</th>
-										<th>Presupuesto  <?php echo($versionActual->getAnio()); ?></th>
-										<th>Porcentaje</th>
+										<th>Clave <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Nombre <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Presupuesto  <?php echo($versionActual->getAnio()); ?> <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
+										<th>Porcentaje <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>
 										<th></th>
 									</tr>
 								</thead>

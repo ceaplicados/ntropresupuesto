@@ -11,8 +11,8 @@ $(document).ready(function(){
 		var totalesVersiones=new Array();
 		for (i = 0; i < resp.versiones.length; i++){
 			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre);
-			$('#tablaConceptoGeneral thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
-			$('#tablaConceptoGeneralVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
+			$('#tablaConceptoGeneral thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
+			$('#tablaConceptoGeneralVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 			var DataYearCP=new Array();
 			var total = 0;
 			if(resp.resumen[resp.versiones[i].Id]){
@@ -37,9 +37,9 @@ $(document).ready(function(){
 			}
 		}
 		$('#tablaConceptoGeneral tfoot tr').prepend('<td>Total</td>');
-		$('#tablaConceptoGeneral thead .anio').prepend('<th>Concepto general</th>');
+		$('#tablaConceptoGeneral thead .anio').prepend('<th>Concepto general <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 		$('#tablaConceptoGeneralVariaciones tfoot tr').prepend('<td>Variación total</td>');
-		$('#tablaConceptoGeneralVariaciones thead .anio').prepend('<th>Concepto general</th>');
+		$('#tablaConceptoGeneralVariaciones thead .anio').prepend('<th>Concepto general <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 
 		for (var j in resp.conceptos){
 			var rowAnio='';
@@ -57,8 +57,12 @@ $(document).ready(function(){
 					rowAnio='<td class="text-right">$'+number_format(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto)+'</td>'+rowAnio;
 					rowAnioAreas='<td class="text-right">'+porcentaje+'%</td>'+rowAnioAreas;
 					if(i < resp.versiones.length - 1 ){
-						var variacion=(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto*100;
-						rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						if(resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id]){
+							var variacion=(resp.resumen[resp.versiones[i].Id][resp.conceptos[j].Id].Monto-resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto)/resp.resumen[resp.versiones[i+1].Id][resp.conceptos[j].Id].Monto*100;
+							rowVariaciones='<td class="text-right">'+variacion.toFixed(1)+'%</td>'+rowVariaciones;
+						}else{
+							rowVariaciones='<td></td>'+rowVariaciones;
+						}
 					}else{
 						rowVariaciones='<td></td>'+rowVariaciones;
 					}
@@ -72,6 +76,7 @@ $(document).ready(function(){
 				$('#tablaConceptoGeneral tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/ConceptosGenerales/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowAnio+'</tr>');
 				$('#tablaConceptoGeneralVariaciones tbody').append('<tr><td>'+resp.conceptos[j].Clave+' - '+resp.conceptos[j].Nombre+' <a href="/'+$('#paramCodigoEstado').val()+'/ConceptosGenerales/'+resp.conceptos[j].Clave+'"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></td>'+rowVariaciones+'</tr>');
 			}
+			listenReorder();
 		}
 
 		for (var i in resp.conceptos){
@@ -134,8 +139,8 @@ $(document).ready(function(){
 		var totalesVersiones=new Array();
 		for (i = 0; i < resp.versiones.length; i++){
 			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre);
-			$('#tablaUnidadResponsable thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
-			$('#tablaUnidadResponsableVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
+			$('#tablaUnidadResponsable thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
+			$('#tablaUnidadResponsableVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 			var DataYearCP=new Array();
 			var total = 0;
 			if(resp.resumen[resp.versiones[i].Id]){
@@ -161,9 +166,9 @@ $(document).ready(function(){
 			}
 		}
 		$('#tablaUnidadResponsable tfoot tr').prepend('<td>Total</td>');
-		$('#tablaUnidadResponsable thead .anio').prepend('<th>Concepto general</th>');
+		$('#tablaUnidadResponsable thead .anio').prepend('<th>Concepto general <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 		$('#tablaUnidadResponsableVariaciones tfoot tr').prepend('<td>Variación total</td>');
-		$('#tablaUnidadResponsableVariaciones thead .anio').prepend('<th>Concepto general</th>');
+		$('#tablaUnidadResponsableVariaciones thead .anio').prepend('<th>Concepto general <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 	
 		for (var j in resp.URs){
 			var rowAnio='';
@@ -248,6 +253,7 @@ $(document).ready(function(){
 				new Chart(canvas, config);
 			});
 		}
+		listenReorder();
 	},"json");
 	
 	showTable($(".tablasCG .tiposTabla button").eq(0));

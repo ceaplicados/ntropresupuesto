@@ -1419,35 +1419,47 @@ function ReOrder(a,b) {
 	if (a > b) return 1;
 	return 0;
 }
-$('th').click(function() {
-	var $th = $(this).closest('th'); 
-	$(this).closest('thead').find('th').removeClass('selected');
-	$(this).closest('th').addClass("selected");
-	$th.toggleClass('ascendente');
-	var isAscendente = $th.hasClass('ascendente');
-	var column = $th.index();
-	var $table = $(this).closest('table');
-	var rows = $table.find('tbody tr');
-	rows.sort(function(rowA,rowB) {
-		var keyA = $(rowA).children('td').eq(column).text().replace('%', '');
-		var keyB = $(rowB).children('td').eq(column).text().replace('%', '').replace(',', '');
-		keyA=keyA.replace(',', '');
-		keyB=keyB.replace(',', '');
-		if(parseFloat(keyA)){
-			 keyA=parseFloat(keyA)
-		}
-		if(parseFloat(keyB)){
-			keyB=parseFloat(keyB)
-		}
-
-		if (isAscendente) return ReOrder(keyA,keyB);
-		return ReOrder(keyB,keyA);
-	});
-	$.each(rows, function(index,row) {
-		$($table).children('tbody').append(row);
-	});
-	return false;
+$(document).ready(function(){
+	listenReorder();
 });
+function listenReorder(){
+	$( "th").unbind( "click" );
+	$('th').click(function() {
+		var $th = $(this).closest('th'); 
+		$(this).closest('thead').find('th').removeClass('selected');
+		$(this).closest('th').addClass("selected");
+		$th.toggleClass('ascendente');
+		var isAscendente = $th.hasClass('ascendente');
+		var column = $th.index();
+		var $table = $(this).closest('table');
+		var rows = $table.find('tbody tr');
+		rows.sort(function(rowA,rowB) {
+			var keyA = $(rowA).children('td').eq(column).text().replace('%', '');
+			var keyB = $(rowB).children('td').eq(column).text().replace('%', '');
+			keyA=keyA.replace(/,/g, '');
+			keyB=keyB.replace(/,/g, '');
+			keyA=keyA.replace(/(?<=^\-|^)/g, '');
+			keyB=keyB.replace(/(?<=^\-|^)/g, '');
+			keyA=keyA.replace('$', '');
+			keyB=keyB.replace('$', '');
+			keyA=keyA.trim();
+			keyB=keyB.trim();
+			if(parseFloat(keyA)){
+				 keyA=parseFloat(keyA)
+			}
+			if(parseFloat(keyB)){
+				keyB=parseFloat(keyB)
+			}
+	
+			if (isAscendente) return ReOrder(keyA,keyB);
+			return ReOrder(keyB,keyA);
+		});
+		$.each(rows, function(index,row) {
+			$($table).children('tbody').append(row);
+		});
+		return false;
+	});
+}
 
 var _colores=new Array();
 _colores[0]="#BFCA4D";

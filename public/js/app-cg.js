@@ -13,9 +13,9 @@ $(document).ready(function(){
 		var totalesVersiones=new Array();
 		for (i = 0; i < resp.versiones.length; i++){
 			ANIOS_HIST.unshift(resp.versiones[i].Anio+" "+resp.versiones[i].Nombre);
-			$('#tablaHistorico thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
-			$('#tablaDistribucionHistorica thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
-			$('#tablaVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+'</th>');
+			$('#tablaHistorico thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
+			$('#tablaDistribucionHistorica thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
+			$('#tablaVariaciones thead .anio').prepend('<th class="text-center">'+resp.versiones[i].Anio+" "+resp.versiones[i].Nombre+' <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 			var DataYearCP=new Array();
 			var total = 0;
 			if(resp.resumen[resp.versiones[i].Id]){
@@ -42,11 +42,11 @@ $(document).ready(function(){
 			}
 		}
 		$('#tablaHistorico tfoot tr').prepend('<td>Total</td>');
-		$('#tablaHistorico thead .anio').prepend('<th>Capítulo de gasto</th>');
+		$('#tablaHistorico thead .anio').prepend('<th>Capítulo de gasto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 		$('#tablaDistribucionHistorica tfoot tr').prepend('<td>Total</td>');
-		$('#tablaDistribucionHistorica thead .anio').prepend('<th>Capítulo de gasto</th>');
+		$('#tablaDistribucionHistorica thead .anio').prepend('<th>Capítulo de gasto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 		$('#tablaVariaciones tfoot tr').prepend('<td>Variación total</td>');
-		$('#tablaVariaciones thead .anio').prepend('<th>Capítulo de gasto</th>');
+		$('#tablaVariaciones thead .anio').prepend('<th>Capítulo de gasto <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></th>');
 
 		for (let j = 0; j < resp.capitulos.length; j++) {
 			var rowAnio='';
@@ -233,6 +233,7 @@ $(document).ready(function(){
 				new Chart(canvas, config);
 			});
 		}
+		listenReorder();
 	},"json");
 	showGraph($(".tiposGrafica button").eq(0));
 });
