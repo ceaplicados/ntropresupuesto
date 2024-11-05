@@ -249,10 +249,11 @@ function filtrarTabla(){
 
 // Treemap (http://bl.ocks.org/ganeshv/6a8e9ada3ab7f2d88022)
 window.addEventListener('message', function(e) {
-	var opts = e.data.opts,
+	if(e.data.opts){
+		var opts = e.data.opts,
 		data = e.data.data;
-
-	return main(opts, data);
+		return main(opts, data);
+	}
 });
 
 var defaults = {
