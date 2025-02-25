@@ -1,4 +1,4 @@
-var aniosFed=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
+var aniosFed=[2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023,2024,2025];
 
 $(document).ready(function() {
 	$("header").toggleClass('active-slide-side-header');
@@ -18,7 +18,7 @@ function chartPresupuestoFederal(){
 	var data=new Array();
 	
 	labels=aniosFed;
-	valores=[6734.2,7284,7433.7,7020,6857.7,7038.1,7520.7,7465.5,7139.4,7442.7,8299.6];
+	valores=[6703.2,7252.8,7384.3,7065.4,6801.9,6982.6,7404.8,7392.9,7288.6,7710,8639.9,9066,8952.9];
 	chartPresupuestoFederal = new Chart(canvasPresupuestoFederal, {
 		type: 'line',
 		data: {
@@ -69,7 +69,7 @@ function chartGastoFederalizado(){
 			labels: labels,
 			datasets: [{
 				label: 'Participaciones',
-				data: [914.2,942.8,961.3,1000.2,1041.6,1082.4,1184.9,1163,1044.9,1070.5,1220.3],
+				data: [910,938.8,955,1006.7,1033.1,1073.8,1166.7,1151.7,1066.7,1108.9,1270.3,1262.8,1289.9],
 				backgroundColor: [
 					_colores_a[1]
 				],
@@ -82,7 +82,7 @@ function chartGastoFederalizado(){
 			},
 			{
 				label: 'Aportaciones',
-				data: [1048,1088.4,1133.8,1093.3,1082.6,1079.8,1017.5,1087.4,948.1,935.1,997.1],
+				data: [1043.2,1083.7,1126.2,1100.3,1073.8,1071.3,1001.8,1076.9,968,968.7,1038,1032.5],
 				backgroundColor: [
 					_colores_a[2]
 				],
@@ -95,7 +95,7 @@ function chartGastoFederalizado(){
 			},
 			{
 				label: 'Convenios',
-				data: [200.7,238.7,262.6,219.1,169.1,166.6,154.1,154.7,114.2,116.9,122.6],
+				data: [199.8,237.7,260.8,220.5,167.8,165.3,151.8,153.2,116.6,121.1,127.6,131.6],
 				backgroundColor: [
 					_colores_a[3]
 				],
@@ -108,7 +108,7 @@ function chartGastoFederalizado(){
 			},
 			{
 				label: 'Subsidios (Ramo 23)',
-				data: [66.9,117,115.2,98.2,69.8,59.8,17.3,18.6,10.4,10.4,10.9],
+				data: [66.6,116.5,114.4,98.8,69.2,59.3,17,18.4,10.6,10.8,11.3,9.6],
 				backgroundColor: [
 					_colores_a[4]
 				],
@@ -151,7 +151,7 @@ function chartGastoFederalizadoComposicion(){
 			labels: labels,
 			datasets: [{
 				label: 'Gasto federalizado',
-				data: [1220.3,997.1,122.6,10.9],
+				data: [1262.80,1032.50,131.60,9.6],
 				backgroundColor: [
 					_colores_a[1], _colores_a[2], _colores_a[3], _colores_a[4]
 				],
